@@ -15,21 +15,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class userController {
+public class UserController {
 
     @Autowired
     private UserService service;
 
-    @GetMapping("mapping")
-    public ResponseEntity<List<User>> find(){
-        List<User> user = new ArrayList<User>();
-        user = service.findByName("bb");
-        final ResponseEntity<List<User>> response = new ResponseEntity<List<User>>(user, HttpStatus.OK);
-        return response;
+    @PostMapping("register")
+    public String registerUser(@RequestBody final User user) 
+    {
+        final User existingUser = service.findByName(user.getUsername());
+        if(existingUser==null)
+        {
+            service.registerUser(user);
+            return "User Registered";
+        }
+        else 
+        {
+            return "Username already exists";
+        }
     }
 
-    @PostMapping("post")
-    public void post(@RequestBody User user){
-        service.registerUser(user);
+    @PostMapping("login")
+    public String login(@RequestBody final User user)
+    {
+        final User existingUser = service.findByName(user.getUsername());
+
+        if(existingUser == null)
+        {
+            return "Invalid Username";
+        } 
+        else if(user.getPassword().equals(existingUser.getPassword()))
+        {
+            return "Logged in";
+        }
+        else 
+        {
+            return "Wrong Password";
+        }
+
     }
+
 }
