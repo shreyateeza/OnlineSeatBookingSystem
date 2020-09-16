@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    
     @PostMapping("register")
     public String registerUser(@RequestBody final User user) 
     {
@@ -53,6 +55,19 @@ public class UserController {
             return "Wrong Password";
         }
 
+    }
+    
+    @PutMapping("updateprofile")
+    public String updateProfile (@RequestBody User user) {
+    	final User existingUser = service.findByName(user.getUsername());
+    	if(existingUser==null) {
+    		service.registerUser(user);
+            return "Invalid username. Registered as new User";
+    	}
+    	else {
+    		service.updateProfile(user);
+    		return "User Profile Updated";
+    	}
     }
 
 }

@@ -19,4 +19,8 @@ public class UserService {
     public void registerUser(User user) {
         repository.save(user);
     }
+    
+    public void updateProfile(User user) {
+    	repository.save(user);
+    }
 }
