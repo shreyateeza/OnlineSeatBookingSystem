@@ -1,6 +1,7 @@
 package com.manipal.seatBooking.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,6 +23,9 @@ public class User implements UserDetails {
 	private String password;
 	private String mobile;
 	private String address;
+	private List<UserSeat> pending;
+	private List<UserSeat> booked;
+	private List<UserSeat> cancelled; 
 
 	public User() {
 	}
@@ -101,5 +105,29 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public List<UserSeat> getPending() {
+		return pending;
+	}
+
+	public void setPending(List<UserSeat> pending) {
+		this.pending = pending;
+	}
+
+	public List<UserSeat> getBooked() {
+		return booked;
+	}
+
+	public void setBooked(List<UserSeat> booked) {
+		this.booked = booked;
+	}
+
+	public List<UserSeat> getCancelled() {
+		return cancelled;
+	}
+
+	public void setCancelled(List<UserSeat> cancelled) {
+		this.cancelled = cancelled;
 	}
 }
