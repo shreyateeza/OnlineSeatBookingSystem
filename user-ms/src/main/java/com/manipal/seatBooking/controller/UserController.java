@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,7 +39,7 @@ public class UserController {
     @Autowired
 	private AuthenticationManager authenticationManager;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String registerUser(@RequestBody final User user) 
     {
         final User existingUser = service.findByName(user.getUsername());
@@ -51,10 +52,7 @@ public class UserController {
         {
             return "Username already exists";
         }
-    }
-
-    @GetMapping("/uers")
-    
+    }    
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception {
@@ -77,9 +75,11 @@ public class UserController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 
-    @PutMapping("details-change/{username}")
-    public String changePassword(@RequestBody User user, @PathVariable String username)
+    @PutMapping("details-change")
+    public String changePassword(@RequestBody User user, @RequestHeader("Authorization") String jwt)
     {
+        jwt = jwt.substring(7);
+        String username = jwtUtil.extractUsername(jwt);
         User existingUser = service.findByName(username); 
         if (existingUser == null){
             return "Invalid Request";
@@ -91,6 +91,4 @@ public class UserController {
 
         return "Updated";
     }
-
-
 }
