@@ -1,58 +1,72 @@
 package com.manipal.seatBooking.seats.model;
 
+
+
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.List;
+
+
 @Document(collection = "seats")
 public class Seat {
+	    
+	    @Id
+	 	private String id;
+	    private int floor;
+	    private int office;
+	    List<BookingElement> bookingList; 
+	    
+	    public Seat() {}
+	    
+		public Seat(String id) {
+			super();
+			this.id = id;
+		}
+		
+		
+		
 
-	@Id
-	private String id;
+		public Seat(String id, int floor, int office, List<BookingElement> bookingList) {
+			super();
+			this.id = id;
+			this.floor = floor;
+			this.office = office;
+			this.bookingList = bookingList;
+		}
 
-	private int seatNo;
-	private int floor;
-	private String office; 
-	private List<BookingInfo> bookingInfo;
-	
-	public Seat(int seatNo, int floor, String office, List<BookingInfo> bookingInfo) {
-		this.seatNo = seatNo;
-		this.floor = floor;
-		this.office = office;
-		this.bookingInfo = bookingInfo;
-	}
+		public String getId() {
+			return id;
+		}
 
-	public Seat() {
-	}
+		public void setId(String id) {
+			this.id = id;
+		}
 
-	public int getSeatNo() {
-		return seatNo;
-	}
+		public List<BookingElement> getBookingList() {
+			return bookingList;
+		}
 
-	public void setSeatNo(int seatNo) {
-		this.seatNo = seatNo;
-	}
+		public void setBookingList(List<BookingElement> bookingList) {
+			this.bookingList = bookingList;
+		}
 
-	public int getFloor() {
-		return floor;
-	}
+		public int getFloor() {
+			return floor;
+		}
 
-	public void setFloor(int floor) {
-		this.floor = floor;
-	}
+		public void setFloor(int floor) {
+			this.floor = floor;
+		}
 
-	public String getOffice() {
-		return office;
-	}
+		public int getOffice() {
+			return office;
+		}
 
-	public void setOffice(String office) {
-		this.office = office;
-	}
+		public void setOffice(int office) {
+			this.office = office;
+		}
+		
+		
 
-	public List<BookingInfo> getbookingInfo() {
-		return bookingInfo;
-	}
-
-	public void setbookingInfo(List<BookingInfo> bookingInfo) {
-		this.bookingInfo = bookingInfo;
-	}
 }
