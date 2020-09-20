@@ -11,6 +11,14 @@ public class BookingInfo {
 	public BookingInfo() {
 	}
 
+	public BookingInfo(Date startDate, Date endDate, String username, String status) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.username = username;
+		this.status = status;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
