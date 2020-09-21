@@ -9,13 +9,13 @@ public class Seat {
 	@Id
 	private String id;
 
-	private int seatNo;
+	private int seatNumber;
 	private int floor;
 	private String office; 
 	private List<BookingInfo> bookingInfo;
 	
 	public Seat(int seatNo, int floor, String office, List<BookingInfo> bookingInfo) {
-		this.seatNo = seatNo;
+		this.seatNumber = seatNo;
 		this.floor = floor;
 		this.office = office;
 		this.bookingInfo = bookingInfo;
@@ -24,12 +24,12 @@ public class Seat {
 	public Seat() {
 	}
 
-	public int getSeatNo() {
-		return seatNo;
+	public int getSeatNumber() {
+		return seatNumber;
 	}
 
 	public void setSeatNo(int seatNo) {
-		this.seatNo = seatNo;
+		this.seatNumber = seatNo;
 	}
 
 	public int getFloor() {
@@ -48,11 +48,15 @@ public class Seat {
 		this.office = office;
 	}
 
-	public List<BookingInfo> getbookingInfo() {
+	public List<BookingInfo> getBookingInfo() {
 		return bookingInfo;
 	}
 
-	public void setbookingInfo(List<BookingInfo> bookingInfo) {
+	public void setBookingInfo(List<BookingInfo> bookingInfo) {
 		this.bookingInfo = bookingInfo;
+	}
+
+	public void addBookingInfo(List<BookingInfo> bookingInfo) {
+		this.bookingInfo.addAll(bookingInfo);
 	}
 }

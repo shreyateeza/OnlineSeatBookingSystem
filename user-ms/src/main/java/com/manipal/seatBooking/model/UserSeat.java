@@ -6,10 +6,11 @@ public class UserSeat {
     private int seatNumber; 
     private Date startDate; 
     private Date endDate;
+    private String status; 
 
     public UserSeat() {
     }
-
+    
     public int getSeatNumber() {
         return seatNumber;
     }
@@ -32,5 +33,13 @@ public class UserSeat {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

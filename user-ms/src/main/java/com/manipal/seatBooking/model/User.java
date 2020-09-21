@@ -1,11 +1,13 @@
 package com.manipal.seatBooking.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Document(collection = "user")
@@ -21,11 +23,10 @@ public class User implements UserDetails {
 
 	private String username;
 	private String password;
+	private String role; 
 	private String mobile;
 	private String address;
-	private List<UserSeat> pending;
-	private List<UserSeat> booked;
-	private List<UserSeat> cancelled; 
+	private List<UserSeat> seats; 
 
 	public User() {
 	}
@@ -84,7 +85,7 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return Arrays.asList(new SimpleGrantedAuthority(role));
 	}
 
 	@Override
@@ -107,27 +108,24 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public List<UserSeat> getPending() {
-		return pending;
+	public String getRole() {
+		return role;
 	}
 
-	public void setPending(List<UserSeat> pending) {
-		this.pending = pending;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public List<UserSeat> getBooked() {
-		return booked;
+	public void addSeats(List<UserSeat> seats)
+	{
+		this.seats.addAll(seats);
 	}
 
-	public void setBooked(List<UserSeat> booked) {
-		this.booked = booked;
+	public List<UserSeat> getSeats() {
+		return seats;
 	}
 
-	public List<UserSeat> getCancelled() {
-		return cancelled;
-	}
-
-	public void setCancelled(List<UserSeat> cancelled) {
-		this.cancelled = cancelled;
+	public void setSeats(List<UserSeat> seats) {
+		this.seats = seats;
 	}
 }
