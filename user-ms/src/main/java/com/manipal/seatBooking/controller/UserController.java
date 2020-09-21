@@ -102,18 +102,6 @@ public class UserController {
         return new ResponseEntity<User>(existingUser, HttpStatus.OK);
     }
 
-    @GetMapping("/helloadmin")
-    public ResponseEntity<List<User>> hello(@RequestBody User user) {
-        List<User> userList = new ArrayList<User>();
-        userList = repository.findByPassword(null);
-        return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
-    }
-
-    @GetMapping("/hello")
-    public String wassup() {
-        return "wassup";
-    }
-
     @GetMapping("/seat")
     public ResponseEntity<Seat[]> searchSeats(@RequestParam(name="office") String office) {
         return restTemplate.getForEntity("http://seat-microservice/seat/"+office,Seat[].class);
