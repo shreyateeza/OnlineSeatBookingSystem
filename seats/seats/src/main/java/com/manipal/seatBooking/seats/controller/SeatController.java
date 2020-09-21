@@ -51,6 +51,22 @@ public class SeatController {
         service.updateSeat(existingSeat); 
     }
 
+    @GetMapping("/admin/seat/{status}")
+    public ResponseEntity<List<Seat>> getSeatsByStatus(@PathVariable String status)
+    {
+        List<Seat> seatList = new ArrayList<Seat>();
+        seatList = service.getByStatus(status);
+        return new ResponseEntity<List<Seat>>(seatList, HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/seat")
+    public ResponseEntity<List<Seat>> getSeats()
+    {
+        List<Seat> seatList = new ArrayList<Seat>();
+        seatList = service.getAllSeats();
+        return new ResponseEntity<List<Seat>>(seatList, HttpStatus.OK);
+    }
+
     @GetMapping("/seat/{office}")
     public ResponseEntity<List<Seat>> getSeatsByOffice(@PathVariable String office){
         List<Seat> seatList = new ArrayList<Seat>();

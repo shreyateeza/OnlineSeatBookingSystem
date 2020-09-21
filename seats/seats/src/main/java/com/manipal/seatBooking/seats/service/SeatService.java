@@ -1,7 +1,10 @@
 package com.manipal.seatBooking.seats.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import com.manipal.seatBooking.seats.model.BookingInfo;
 import com.manipal.seatBooking.seats.model.Seat;
 import com.manipal.seatBooking.seats.repository.SeatRepository;
 
@@ -32,6 +35,29 @@ public class SeatService {
 
     public void deleteSeat(int seatNumber){
         repository.deleteBySeatNumber(seatNumber);
+    }
+
+    public List<Seat> getByStatus(String status){
+        List<Seat> seatList = new ArrayList<Seat>();
+        seatList = repository.findByStatus(status);
+        for (Seat seat:seatList)
+        {
+            Iterator<BookingInfo> itr = seat.getBookingInfo().iterator();
+            while (itr.hasNext())
+            {
+                BookingInfo bookingInfo = itr.next();
+                if (bookingInfo.getStatus().equals(status))
+                    continue;
+                else
+                    seat.getBookingInfo().remove(bookingInfo);
+            }
+        }
+
+        return seatList;
+    }
+
+    public List<Seat> getAllSeats(){
+        return repository.findAll();
     }
 
 
