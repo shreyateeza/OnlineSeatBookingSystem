@@ -81,7 +81,7 @@ public class UserController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    @PutMapping("/details-change")
+    @PutMapping("/profile")
     public String changePassword(@RequestBody User user, @RequestHeader("Authorization") String jwt) {
         String username = extractUsername(jwt);
         User existingUser = service.findByName(username);
@@ -95,7 +95,7 @@ public class UserController {
         return "Updated";
     }
 
-    @GetMapping("/view-profile")
+    @GetMapping("/profile")
     public ResponseEntity<User> getUserDetails(@RequestHeader("Authorization") String jwt) {
         String username = jwtUtil.extractUsername(jwt);
         User existingUser = service.findByName(username);

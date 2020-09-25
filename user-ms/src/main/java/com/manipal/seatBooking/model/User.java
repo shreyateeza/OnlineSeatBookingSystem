@@ -1,5 +1,6 @@
 package com.manipal.seatBooking.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -32,11 +33,11 @@ public class User implements UserDetails {
 	}
 
 	
-	public User(String username) {
+	public User(final String username) {
 		this.username = username;
 	}
 
-	public User(String username, String password, String mobile, String address) {
+	public User(final String username, final String password, final String mobile, final String address) {
 		this.username = username;
 		this.password = password;
 		this.mobile = mobile;
@@ -48,7 +49,7 @@ public class User implements UserDetails {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -57,7 +58,7 @@ public class User implements UserDetails {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -65,7 +66,7 @@ public class User implements UserDetails {
 		return mobile;
 	}
 
-	public void setMobile(String mobile) {
+	public void setMobile(final String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -79,7 +80,7 @@ public class User implements UserDetails {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(final String address) {
 		this.address = address;
 	}
 
@@ -112,12 +113,13 @@ public class User implements UserDetails {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(final String role) {
 		this.role = role;
 	}
 
-	public void addSeats(List<UserSeat> seats)
-	{
+	public void addSeats(final List<UserSeat> seats) {
+		if (this.seats == null)
+			this.seats = new ArrayList<UserSeat>();
 		this.seats.addAll(seats);
 	}
 
@@ -125,7 +127,7 @@ public class User implements UserDetails {
 		return seats;
 	}
 
-	public void setSeats(List<UserSeat> seats) {
+	public void setSeats(final List<UserSeat> seats) {
 		this.seats = seats;
 	}
 }
