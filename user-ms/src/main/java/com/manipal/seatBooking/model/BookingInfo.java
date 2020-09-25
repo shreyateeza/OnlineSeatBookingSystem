@@ -11,6 +11,13 @@ public class BookingInfo {
     public BookingInfo() {
     }
 
+    public BookingInfo(UserSeat seatInfo, String username){
+        this.username = username;
+        this.startDate = seatInfo.getStartDate();
+        this.endDate = seatInfo.getEndDate();
+        this.status = seatInfo.getStatus();
+    }
+
     public Date getStartDate() {
         return startDate;
     }

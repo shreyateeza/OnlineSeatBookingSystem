@@ -1,11 +1,14 @@
 package com.manipal.seatBooking.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Document(collection = "user")
@@ -21,21 +24,20 @@ public class User implements UserDetails {
 
 	private String username;
 	private String password;
+	private String role; 
 	private String mobile;
 	private String address;
-	private List<UserSeat> pending;
-	private List<UserSeat> booked;
-	private List<UserSeat> cancelled; 
+	private List<UserSeat> seats; 
 
 	public User() {
 	}
 
 	
-	public User(String username) {
+	public User(final String username) {
 		this.username = username;
 	}
 
-	public User(String username, String password, String mobile, String address) {
+	public User(final String username, final String password, final String mobile, final String address) {
 		this.username = username;
 		this.password = password;
 		this.mobile = mobile;
@@ -47,7 +49,7 @@ public class User implements UserDetails {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 
@@ -56,7 +58,7 @@ public class User implements UserDetails {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -64,7 +66,7 @@ public class User implements UserDetails {
 		return mobile;
 	}
 
-	public void setMobile(String mobile) {
+	public void setMobile(final String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -78,13 +80,13 @@ public class User implements UserDetails {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(final String address) {
 		this.address = address;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return Arrays.asList(new SimpleGrantedAuthority(role));
 	}
 
 	@Override
@@ -107,27 +109,25 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public List<UserSeat> getPending() {
-		return pending;
+	public String getRole() {
+		return role;
 	}
 
-	public void setPending(List<UserSeat> pending) {
-		this.pending = pending;
+	public void setRole(final String role) {
+		this.role = role;
 	}
 
-	public List<UserSeat> getBooked() {
-		return booked;
+	public void addSeats(final List<UserSeat> seats) {
+		if (this.seats == null)
+			this.seats = new ArrayList<UserSeat>();
+		this.seats.addAll(seats);
 	}
 
-	public void setBooked(List<UserSeat> booked) {
-		this.booked = booked;
+	public List<UserSeat> getSeats() {
+		return seats;
 	}
 
-	public List<UserSeat> getCancelled() {
-		return cancelled;
-	}
-
-	public void setCancelled(List<UserSeat> cancelled) {
-		this.cancelled = cancelled;
+	public void setSeats(final List<UserSeat> seats) {
+		this.seats = seats;
 	}
 }

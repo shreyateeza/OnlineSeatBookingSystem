@@ -1,21 +1,28 @@
 package com.manipal.seatBooking.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Seat {
-    private int seatNo; 
+    private int seatNumber; 
     private int floor;
     private String office; 
     private List<BookingInfo> bookingInfo;
 
     public Seat() {}
 
-    public int getSeatNo() {
-        return seatNo;
+    public Seat(UserSeat seat, String username) {
+        this.seatNumber = seat.getSeatNumber();
+        bookingInfo = new ArrayList<BookingInfo>(Arrays.asList(new BookingInfo(seat, username)));
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
     }
 
     public void setSeatNo(int seatNo) {
-        this.seatNo = seatNo;
+        this.seatNumber = seatNo;
     }
 
     public int getFloor() {
@@ -39,6 +46,6 @@ public class Seat {
     }
 
     public void setBookingInfo(List<BookingInfo> bookingInfo) {
-        this.bookingInfo = bookingInfo;
+        this.bookingInfo = new ArrayList<BookingInfo> (bookingInfo);
     }
 }
