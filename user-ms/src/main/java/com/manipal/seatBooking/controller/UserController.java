@@ -97,29 +97,29 @@ public class UserController {
 
     @GetMapping("/profile")
     public ResponseEntity<User> getUserDetails(@RequestHeader("Authorization") String jwt) {
-        String username = jwtUtil.extractUsername(jwt);
+        String username = extractUsername(jwt);
         User existingUser = service.findByName(username);
         return new ResponseEntity<User>(existingUser, HttpStatus.OK);
     }
 
     @GetMapping("/seat")
-    public ResponseEntity<Seat[]> searchSeats(@RequestParam(name="office") String office) {
-        return restTemplate.getForEntity("http://seat-microservice/seat/"+office,Seat[].class);
+    public ResponseEntity<Seat[]> searchSeats(@RequestParam(name = "office") String office) {
+        return restTemplate.getForEntity("http://seat-microservice/seat/" + office, Seat[].class);
     }
 
     @PutMapping("/seat")
-    public ResponseEntity<List<UserSeat>> bookSeat(@RequestBody User seatList, @RequestHeader("Authorization") String jwt)
-    {
+    public ResponseEntity<List<UserSeat>> bookSeat(@RequestBody User seatList,
+            @RequestHeader("Authorization") String jwt) {
         String username = extractUsername(jwt);
-        User user = service.findByName(username); 
+        User user = service.findByName(username);
         user.addSeats(seatList.getSeats());
         service.updateProfile(user);
 
-        List<Seat> seats = new ArrayList<Seat>(); 
-        for(UserSeat seat:seatList.getSeats()){
+        List<Seat> seats = new ArrayList<Seat>();
+        for (UserSeat seat : seatList.getSeats()) {
             seats.add(new Seat(seat, username));
         }
-        restTemplate.put("http://seat-microservice/seat",seats);
+        restTemplate.put("http://seat-microservice/seat", seats);
         return new ResponseEntity<List<UserSeat>>(seatList.getSeats(), HttpStatus.OK);
     }
 }
