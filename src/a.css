@@ -1,0 +1,11 @@
+.d-inline-flex:hover{
+    transition: 0.5s;
+    box-shadow: 0px 0px 3px 2px gray;
+    padding: 20px;
+    border-radius: 3px;
+    
+}
+.d-inline-flex{
+    padding: 20px;
+    
+}
