@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.manipal.seatBooking.seats.exception.SeatNotFoundException;
 import com.manipal.seatBooking.seats.model.BookingInfo;
 import com.manipal.seatBooking.seats.model.Seat;
 import com.manipal.seatBooking.seats.repository.SeatRepository;
@@ -18,8 +19,11 @@ public class SeatService {
     private SeatRepository repository;
 
     public Seat getSeatByNumber(int seatNumber){
-        return repository.findBySeatNumber(seatNumber);
-    }
+		Seat s = repository.findBySeatNumber(seatNumber);
+		if(s==null)
+			throw new SeatNotFoundException(seatNumber);
+		return s;
+	}
 
     public void updateSeat(Seat seat){
         repository.save(seat);
