@@ -1,5 +1,6 @@
 package com.manipal.seatBooking.service;
 
+import com.manipal.seatBooking.exception.UserNotFoundException;
 import com.manipal.seatBooking.model.User;
 import com.manipal.seatBooking.repository.UserRepository;
 
@@ -16,7 +17,10 @@ public class UserService implements UserDetailsService{
     private UserRepository repository;
 
     public User findByName(String name) {
-        return repository.findByUsername(name);
+    	User u = repository.findByUsername(name);
+    	if(u==null)
+    		throw new UserNotFoundException(name);
+    	return u;
     }
 
     public void registerUser(User user) {
