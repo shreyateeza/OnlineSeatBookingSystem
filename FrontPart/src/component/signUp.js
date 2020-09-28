@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignIn() {
+export default function SignUp() {
 	const classes = useStyles();
 
 	const [username, setUsername] = useState();
@@ -48,21 +48,21 @@ export default function SignIn() {
 	const submit = () => {
 		const requestBody = {
 			username: username,
-			password: password,
+            password: password,
+            
 		};
 
 		console.log(requestBody);
 
 		axios
-			.post('http://localhost:8082/user/authenticate', requestBody, {
+			.post('http://localhost:8082/user/register', requestBody, {
 				headers: {
 					'content-type': 'application/json',
 				},
 			})
 			.then((res) => {
-				localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
-				localStorage.setItem('User', username);
-				localStorage.setItem('password', password);
+				// localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
+				// localStorage.setItem('User', username);
 				console.log(res.data);
 			});
 	};
@@ -75,9 +75,9 @@ export default function SignIn() {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
-					Sign in
+					Sign Up
 				</Typography>
-				<form className={classes.form} action="/" noValidate>
+				<form className={classes.form} noValidate>
 					<TextField
 						variant="outlined"
 						margin="normal"
@@ -112,14 +112,10 @@ export default function SignIn() {
 						Sign In
 					</Button>
 					<Grid container justify="space-between" direction="row">
+					
 						<Grid item>
-							<Link href="#" variant="body2">
-								Forgot password?
-							</Link>
-						</Grid>
-						<Grid item>
-							<Link href="register" variant="body2">
-								{"Don't have an account? Sign Up"}
+							<Link href="/login" variant="body2">
+								{"Already have an account? Sign in"}
 							</Link>
 						</Grid>
 					</Grid>
