@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import { history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -62,9 +63,10 @@ export default function SignIn() {
 			.then((res) => {
 				localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				localStorage.setItem('User', username);
-				localStorage.setItem('password', password);
-				console.log("saved User password n Token")
 				console.log(res.data);
+				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
+				localStorage.setItem('isAdmin', claims.isAdmin);
+				history.push;
 			});
 	};
 
@@ -103,17 +105,17 @@ export default function SignIn() {
 						autoComplete="current-password"
 						onChange={handlePassChange}
 					/>
-					{/* <Link href="userdashboard" variant="body2"> */}
-					<Button
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={classes.submit}
-						onClick={submit}
-					>
-						Sign In
-					</Button>
-					{/* </Link> */}
+					<Link href="userdashboard" variant="body2">
+						<Button
+							fullWidth
+							variant="contained"
+							color="primary"
+							className={classes.submit}
+							onClick={submit}
+						>
+							Sign In
+						</Button>
+					</Link>
 					<Grid container justify="space-between" direction="row">
 						<Grid item>
 							<Link href="#" variant="body2">

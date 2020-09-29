@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import './styles.css';
 import AddSeat from './component/AddSeat';
 import Admin from './component/Admin';
@@ -16,6 +16,16 @@ import LoginPage from './component/LoginPage';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 
 export default function App() {
+	let flag = false;
+	axios.interceptors.response.use(
+		function (response) {
+			return response;
+		},
+		function (error) {
+			if (error.response.status === 403 || 401) return Promise.reject(error);
+		}
+	);
+
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
@@ -46,7 +56,6 @@ export default function App() {
 						strict
 						component={AdminDashboard}
 					/>
-					<Route path="/userdashboard" exact strict component={UserDashboard} />
 				</Router>
 			</ThemeProvider>
 		</div>
