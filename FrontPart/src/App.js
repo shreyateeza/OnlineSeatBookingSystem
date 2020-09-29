@@ -5,7 +5,6 @@ import AddSeat from './component/AddSeat';
 import Admin from './component/Admin';
 import Bookings from './component/Bookings';
 import DeleteSeat from './component/DeleteSeat';
-import AddSeatUri from './component/AddSeatUri';
 import SearchSeat from './component/SearchSeat';
 import SwapSeatRequest from './component/SwapSeatRequest';
 import UpdateProfile from './component/UpdateProfile';
@@ -25,7 +24,7 @@ export default function App() {
 					<Route path="/admin" exact strict component={Admin} />
 					<Route path="/bookings" exact strict component={Bookings} />
 					<Route path="/delete" exact strict component={DeleteSeat} />
-					<Route path="/addseaturi" exact strict component={AddSeatUri} />
+					<Route path="/addseat" exact strict component={AddSeat} />
 					<Route path="/searchseat" exact strict component={SearchSeat} />
 					<Route
 						path="/swapseatrequest"

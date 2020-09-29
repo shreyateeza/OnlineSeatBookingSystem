@@ -9,6 +9,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -85,7 +86,7 @@ function UserDashboard() {
 				</Link>
 				{isAdmin && (
 					<React.Fragment>
-						<Link to="#" style={{ textDecoration: 'none' }}>
+						<Link to="/addseat" style={{ textDecoration: 'none' }}>
 							<Button
 								variant="contained"
 								color="primary"
@@ -97,7 +98,7 @@ function UserDashboard() {
 							</Button>
 						</Link>
 
-						<Link to="#" style={{ textDecoration: 'none' }}>
+						<Link to="/delete" style={{ textDecoration: 'none' }}>
 							<Button
 								variant="contained"
 								color="secondary"
@@ -106,6 +107,17 @@ function UserDashboard() {
 								startIcon={<DeleteIcon />}
 							>
 								Delete Seats
+							</Button>
+						</Link>
+
+						<Link to="/admin" style={{ textDecoration: 'none' }}>
+							<Button
+								variant="contained"
+								size="large"
+								className={classes.button}
+								startIcon={<SaveIcon />}
+							>
+								Update Bookings
 							</Button>
 						</Link>
 					</React.Fragment>
