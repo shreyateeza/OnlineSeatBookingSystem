@@ -62,8 +62,8 @@ export default function SignIn() {
 			.then((res) => {
 				localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				localStorage.setItem('User', username);
-				localStorage.setItem('password', password);
-				console.log(res.data);
+				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
+				localStorage.setItem('isAdmin', claims.isAdmin);
 			});
 	};
 

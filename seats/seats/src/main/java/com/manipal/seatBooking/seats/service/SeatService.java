@@ -13,39 +13,39 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SeatService {
-    
+
     @Autowired
     private SeatRepository repository;
 
-    public Seat getSeatByNumber(int seatNumber){
+    public Seat getSeatByNumber(int seatNumber) {
         return repository.findBySeatNumber(seatNumber);
     }
 
-    public void updateSeat(Seat seat){
+    public void updateSeat(Seat seat) {
         repository.save(seat);
     }
 
-    public List<Seat> getByOffice(String office){
+    public List<Seat> getByOffice(String office) {
         return repository.findByOffice(office);
     }
 
-    public void addSeat(Seat seat){
+    public void addSeat(Seat seat) {
         repository.save(seat);
     }
 
-    public void deleteSeat(int seatNumber){
+    public void deleteSeat(int seatNumber) {
         repository.deleteBySeatNumber(seatNumber);
     }
 
-    public List<Seat> getByStatus(String status){
+    public List<Seat> getByStatus(String status) {
         List<Seat> seatList = new ArrayList<Seat>();
         seatList = repository.findByStatus(status);
-        for (Seat seat:seatList)
-        {
-            Iterator<BookingInfo> itr = seat.getBookingInfo().iterator();
-            while (itr.hasNext())
-            {
-                BookingInfo bookingInfo = itr.next();
+        Iterator<Seat> itr = seatList.iterator();
+        while (itr.hasNext()) {
+            Seat seat = itr.next();
+            Iterator<BookingInfo> itr1 = seat.getBookingInfo().iterator();
+            while (itr1.hasNext()) {
+                BookingInfo bookingInfo = itr1.next();
                 if (bookingInfo.getStatus().equals(status))
                     continue;
                 else
@@ -56,9 +56,8 @@ public class SeatService {
         return seatList;
     }
 
-    public List<Seat> getAllSeats(){
+    public List<Seat> getAllSeats() {
         return repository.findAll();
     }
-
 
 }
