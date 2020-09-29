@@ -49,7 +49,7 @@ export default function SignUp() {
 		const requestBody = {
 			username: username,
             password: password,
-            
+            "seats":[]
 		};
 
 		console.log(requestBody);
@@ -64,7 +64,9 @@ export default function SignUp() {
 				// localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				// localStorage.setItem('User', username);
 				console.log(res.data);
+				// document.open('userdashboard')
 			});
+			
 	};
 
 	return (
@@ -77,7 +79,7 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Sign Up
 				</Typography>
-				<form className={classes.form} noValidate>
+				<form className={classes.form} action='http://localhost:3000/userdashboard' noValidate>
 					<TextField
 						variant="outlined"
 						margin="normal"
@@ -102,6 +104,7 @@ export default function SignUp() {
 						autoComplete="current-password"
 						onChange={handlePassChange}
 					/>
+					
 					<Button
 						fullWidth
 						variant="contained"
@@ -109,8 +112,10 @@ export default function SignUp() {
 						className={classes.submit}
 						onClick={submit}
 					>
-						Sign In
+						Sign Up
+						
 					</Button>
+				
 					<Grid container justify="space-between" direction="row">
 					
 						<Grid item>

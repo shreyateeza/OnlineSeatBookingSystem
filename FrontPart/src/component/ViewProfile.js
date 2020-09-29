@@ -39,34 +39,36 @@ function ViewProfile() {
     <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></Link>
     </form>
   </nav>
+  <br/><br/><br/> 
 
-
-  <div style={{width: '50%', border:'1px red solid'}}>
-  <Link href="/updateprofile">
-  <button class="btn btn-warning float-right float-top"> Edit Profile </button></Link>
+  <div style={{width: '50%', border:'1px gray solid', padding:'30px'}}>
+    
+  <Link to="/updateprofile" exact>
+  <button onClick="/updateprofile" class="btn btn-warning float-right float-top"> Edit Profile </button>
+  </Link>
 
 
     <br/><br/>
     <br/>
     <div class="form-group">
       <Typography component="h1" variant="h5">
-					Username
+					<left>Username:</left>   <right><b> {user.username} </b></right>
 				</Typography>
-     <h5>{user.username}</h5>
+     {/* <h5>{user.username}</h5> */}
 
     </div>
     
     <div class="form-group"><Typography component="h1" variant="h5">
-					Mobile
+					<left>Mobile:</left>      <right><b> {user.mobile} </b></right>
 				</Typography>
-        <h5>{user.mobile}</h5>
+        {/* <h5>{user.mobile}</h5> */}
       </div>
 
       <div class="form-group">
       <Typography component="h1" variant="h5">
-					Addrress
+					<left>Addrress:</left>   <right><b> {user.address} </b></right>
 				</Typography>
-        <h5>{user.address}</h5>
+        {/* <h5>{user.address}</h5> */}
       </div>
       {/* <div class="form-group">
         <label for="email">City:</label>

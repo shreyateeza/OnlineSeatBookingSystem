@@ -21,6 +21,7 @@ function AddSeat() {
   const [bookingInfo, setBookingInto] = useState([{
     "status" : "unbooked"
   }]);
+  const offices = ['Telstra', 'Home', 'Manipal'];
 
   const [password, setPassword] = useState()
 
@@ -32,7 +33,7 @@ function AddSeat() {
       "seatNumber":seatNo,
       "floor":floor,
       "office":office,
-      "bookgingInfo":bookingInfo
+      "bookingInfo":[]
     }
     console.log(requestbody)
     axios.post("http://localhost:8082/admin/seat", requestbody, { headers: AuthHeader()}).then((res) => {
@@ -70,6 +71,9 @@ function AddSeat() {
     setPassword(e.target.value)
   }
 
+  const handleOfficeChange = (event) => {
+    setOffice(event.target.value);
+  };
   return (
     <div>
     <nav class="navbar navbar-light bg-light justify-content-between">
@@ -115,10 +119,22 @@ function AddSeat() {
           <label for="email"> Floor:</label>
           <input type="number" class="form-control"  onChange={handlechange2}/>
         </div> */}
+        
+            <h4 id="demo-simple-select-label p-3">Office : 
+            <select
+              labelId="Office"
+              class="m-3"
+              id="office"
+              value={office}
+              onChange={handleOfficeChange}
+            >
+              {offices.map((officeLocation) => (
+                <option value={officeLocation}> {officeLocation} </option>
+              ))}
+            </select></h4>
+        
 
-
-
-        <TextField
+        {/* <TextField
 						variant="outlined"
 						margin="normal"
 						required
@@ -128,7 +144,7 @@ function AddSeat() {
 						autoComplete="seat id"
 						onChange={handlechange3}
 				
-					/>
+					/> */}
         {/* <div class="form-group">
           <label for="email"> Office:</label>
           <input type="text" class="form-control" onChange={handlechange3} />

@@ -62,8 +62,9 @@ export default function SignIn() {
 			.then((res) => {
 				localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				localStorage.setItem('User', username);
-				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
-				localStorage.setItem('isAdmin', claims.isAdmin);
+				localStorage.setItem('password', password);
+				console.log("saved User password n Token")
+				console.log(res.data);
 			});
 	};
 
@@ -102,6 +103,7 @@ export default function SignIn() {
 						autoComplete="current-password"
 						onChange={handlePassChange}
 					/>
+					{/* <Link href="userdashboard" variant="body2"> */}
 					<Button
 						fullWidth
 						variant="contained"
@@ -111,6 +113,7 @@ export default function SignIn() {
 					>
 						Sign In
 					</Button>
+					{/* </Link> */}
 					<Grid container justify="space-between" direction="row">
 						<Grid item>
 							<Link href="#" variant="body2">

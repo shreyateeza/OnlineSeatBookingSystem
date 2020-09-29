@@ -89,30 +89,30 @@ useEffect(
 						disabled
 				
 					/>
-    
+    <h5>Mobile:</h5>
     <TextField
-						variant="outlined"
+						variant="filled"
 						margin="normal"
 						required
 						fullWidth
-						
-						label="Mobile"
-						value={mob}
+						placeholder=''
+						// label="Mobile"
+            // defaultValue={mob}
+            value={mob}
 						onChange={handlechange2}
-				
+          autoFocus
 					/>
     {/* <div class="form-group">
         <label for="email">Mobile: </label>
         <input type="text" class="form-control" id="mobile" value={mob}  onChange={handlechange2}/>
       </div> */}
-
+<h5>Address:</h5>
         <TextField
-						variant="outlined"
+						variant="filled"
 						margin="normal"
 						required
 						fullWidth
-						
-						label="Address"
+					
 						value={add}
 						onChange={handlechange}
 				
@@ -127,7 +127,7 @@ useEffect(
             // fullWidth
             
             variant="contained"
-						color="secondary"
+						color="primary"
 						onClick={handleSubmit}
 					>Update</Button>
 

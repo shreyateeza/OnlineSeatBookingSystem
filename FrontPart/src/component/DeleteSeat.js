@@ -93,10 +93,10 @@ function DeleteSeat() {
 						id="password"
 						label="password"
             
-            value={seatNo}
+            // value={seatNo}
 						autoComplete="seat id"
 						onChange={handlechange2}
-						autoFocus
+						// autoFocus
 					/>
 {/* 
         <div class="form-group">
