@@ -1,98 +1,144 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import {
+	AppBar,
+	Toolbar,
+	Typography,
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	menuButton: {
+		marginRight: theme.spacing(2),
+	},
+	title: {
+		flexGrow: 1,
+	},
+	table: {
+		width: 1000,
+	},
+	menuBtn: {
+		textDecoration: 'none',
+	},
+}));
 
 function Bookings() {
-  return (
-    <div>
+	const classes = useStyles();
+	const [seatInfo, setSeatInfo] = useState([]);
 
-<nav class="navbar navbar-light bg-light justify-content-between">
-                    <a class="navbar-brand"><big><b>BOOKING HISTORY</b></big></a>
-                    <form class="form-inline">
-                    <NavLink to="/admindashboard" exact activeStyle={{ color:'green' }}>
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button>
-                    </NavLink>
-                    </form>
-                </nav>
-    <div>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">BOOKING DATE</th>
-            <th scope="col">SEAT ID</th>
-            <th scope="col">START TIME</th>
-            <th scope="col">END TIME</th>
+	const getHeaders = () => {
+		return {
+			authorization: localStorage.getItem('Token'),
+			'Content-type': 'application/json',
+		};
+	};
 
-            <th scope="col">STATUS</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>12-12-12</td>
-            <td>1</td>
-            <td>1:00 PM</td>
-            <td>4:00 PM</td>
-            <td>BOOKED</td>
-            <td>
-              <button class="btn btn-warning">Cancel</button>
-            </td>
-            <td>
-              <button class="btn btn-info">Swap Seat</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>7-7-2020</td>
-            <td>4</td>
+	useEffect(async () => {
+		const res = await axios.get('http://localhost:8082/user/profile', {
+			headers: getHeaders(),
+		});
+		res.data.seats.forEach((seat) => {
+			if (moment(seat.startDate).isBefore(moment())) seat.status = 'past';
+		});
+		setSeatInfo(res.data.seats);
+	}, []);
 
-            <td>2:00 PM</td>
-            <td>5:00 PM</td>
-            <td>PENDING</td>
-            <td>
-              <button class="btn btn-warning">Cancel</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>8-8-2021</td>
-            <td>9</td>
+	const isDisabled = (status) => {
+		if (status === 'cancelled' || 'past') return true;
+		else return false;
+	};
 
-            <td>2:00 PM</td>
-            <td>5:00 PM</td>
+	const handleClick = (index) => {
+		setSeatInfo((seat) => {
+			seat[index].status = 'cancelled';
+			return [...seat];
+		});
+		const requestBody = {
+			seats: [seatInfo[index]],
+		};
+		axios.put('http://localhost:8082/user/seat?cancelled=true', requestBody, {
+			headers: getHeaders(),
+		});
+	};
 
-            <td>BOOKED</td>
-            <td>
-              <button class="btn btn-warning">Cancel</button>
-            </td>
-            <td>
-              <button class="btn btn-info">Swap Seat</button>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">4</th>
-            <td>18-8-2022</td>
-            <td>19</td>
-
-            <td>1:00 PM</td>
-            <td>5:00 PM</td>
-
-            <td>Swap-Req</td>
-            <td>
-              <button class="btn btn-warning">Cancel</button>
-            </td>
-            <td>
-              <button class="btn btn-info">Accept</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    </div>
-  );
+	return (
+		<div>
+			<AppBar position="static">
+				<Toolbar>
+					<Typography variant="h5" className={classes.title}>
+						Bookings
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							className={classes.menuBtn}
+						>
+							Back to Dashboard
+						</Button>
+					</Link>
+				</Toolbar>
+			</AppBar>
+			<Grid container justify="center">
+				<Table className={classes.table} size="small" aria-label="simple table">
+					<TableHead>
+						<TableRow>
+							<TableCell>ID</TableCell>
+							<TableCell align="center">Start Time</TableCell>
+							<TableCell align="center">End Time</TableCell>
+							<TableCell align="right">Status</TableCell>
+							<TableCell align="center">Action</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{seatInfo &&
+							seatInfo.map((seat, index) => (
+								<TableRow key={index}>
+									<TableCell component="th" scope="row">
+										{seat.seatNumber}
+									</TableCell>
+									<TableCell align="center">
+										{moment(seat.startDate).fromNow()}
+									</TableCell>
+									<TableCell align="center">
+										{moment(seat.endDate).fromNow()}
+									</TableCell>
+									<TableCell align="right">{seat.status}</TableCell>
+									<TableCell align="center">
+										<Button
+											color="secondary"
+											size="small"
+											disabled={isDisabled(seat.status)}
+											onClick={() => {
+												handleClick(index);
+											}}
+										>
+											Cancel
+										</Button>
+									</TableCell>
+								</TableRow>
+							))}
+					</TableBody>
+				</Table>
+			</Grid>
+		</div>
+	);
 }
 
 export default Bookings;

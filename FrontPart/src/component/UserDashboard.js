@@ -1,70 +1,88 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Grid, Typography, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import HistoryIcon from '@material-ui/icons/History';
+import SearchIcon from '@material-ui/icons/Search';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+
+const useStyles = makeStyles((theme) => ({
+	button: {
+		margin: theme.spacing(1),
+	},
+}));
 
 function UserDashboard() {
-    return (
+	const classes = useStyles();
 
-        <>
-        <button class='btn btn-warning m-2 float-right'> Log out </button>
-        <div style={{margin:'auto'}}><br/><br/><br/><br/>
-             <h1 class="display-5"><b><big>USER DASHBOARD </big></b></h1> <br/><br/><br/> 
-                <div class="d-flex justify-content-center mt-2">
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="/bookings"><i class="fas fa-history m-2 fa-2x " /></a>
-                    <br/>
-                            Booking History
-                    </h5>
-                    </div>
+	return (
+		<div>
+			<Typography variant="h1"> User Dashboard </Typography>
+			<Grid justify="center">
+				<Link to="/bookings" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={classes.button}
+						startIcon={<HistoryIcon />}
+					>
+						Booking History
+					</Button>
+				</Link>
 
+				<Link to="/searchseat" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={classes.button}
+						startIcon={<SearchIcon />}
+					>
+						Search for Seats
+					</Button>
+				</Link>
 
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="/searchseat"><i class="fas fa-search m-2 fa-2x" /></a>
-                    <br/>
-                            Search Seat
-                    </h5>
-                    </div>
+				<Link to="/userseatbooking" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={classes.button}
+						startIcon={<AddBoxIcon />}
+					>
+						Book a seat
+					</Button>
+				</Link>
 
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="/userseatbooking"><i class="fas fa-plus-square m-2 fa-2x " /></a>
-                    <br/>
-                            Book Seats
-                    </h5>
-                    </div>
+				<Link to="/#" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={classes.button}
+						startIcon={<AccountBoxIcon />}
+					>
+						Edit Profile
+					</Button>
+				</Link>
 
-
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="/#"><i class="fas fa-user-circle m-2 fa-2x" /></a>
-                    <br/>
-                            My Profile
-                    </h5>
-                    </div>
-
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="/bookings"><i class="fas fa-tasks m-2 fa-2x " /></a>
-                    <br/>
-                            Manage Bookings
-                    </h5>
-                    </div>
-
-
-                    <div class="d-inline-flex m-2 w-15">
-                    <h5>
-                    <a href="#"><i class="fas fa-unlock-alt m-2 fa-2x" /></a>
-                    <br/>
-                            Change Password
-                    </h5>
-                    </div>
-               </div>
-
-               
-        </div>
-        </>
-
-    );
+				<Link to="/bookings" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						className={classes.button}
+						startIcon={<AssignmentIcon />}
+					>
+						Manage Bookings
+					</Button>
+				</Link>
+			</Grid>
+		</div>
+	);
 }
 
 export default UserDashboard;

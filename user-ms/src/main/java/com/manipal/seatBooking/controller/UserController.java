@@ -109,17 +109,33 @@ public class UserController {
 
     @PutMapping("/seat")
     public ResponseEntity<List<UserSeat>> bookSeat(@RequestBody User seatList,
+            @RequestParam(value = "cancelled", required = false, defaultValue = "false") boolean cancelled,
             @RequestHeader("Authorization") String jwt) {
         String username = extractUsername(jwt);
         User user = service.findByName(username);
-        user.addSeats(seatList.getSeats());
-        service.updateProfile(user);
+        if (!cancelled) {
+            user.addSeats(seatList.getSeats());
+            service.updateProfile(user);
 
-        List<Seat> seats = new ArrayList<Seat>();
-        for (UserSeat seat : seatList.getSeats()) {
-            seats.add(new Seat(seat, username));
+            List<Seat> seats = new ArrayList<Seat>();
+            for (UserSeat seat : seatList.getSeats()) {
+                seats.add(new Seat(seat, username));
+            }
+            restTemplate.put("http://seat-microservice/seat", seats);
+        } else {
+            UserSeat cancelledSeat = seatList.getSeats().get(0);
+            for (UserSeat seat : user.getSeats()) {
+                if (cancelledSeat.getStartDate().equals(seat.getStartDate())
+                        && cancelledSeat.getSeatNumber() == seat.getSeatNumber()) {
+                    seat.setStatus("cancelled");
+                }
+            }
+            service.updateProfile(user);
+            Seat seat = new Seat(cancelledSeat, username);
+            restTemplate.put("http://seat-microservice/admin/seat", seat);
         }
-        restTemplate.put("http://seat-microservice/seat", seats);
+
         return new ResponseEntity<List<UserSeat>>(seatList.getSeats(), HttpStatus.OK);
     }
+
 }
