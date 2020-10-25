@@ -5,7 +5,6 @@ import AddSeat from './component/AddSeat';
 import Admin from './component/Admin';
 import Bookings from './component/Bookings';
 import DeleteSeat from './component/DeleteSeat';
-import AddSeatUri from './component/AddSeatUri';
 import SearchSeat from './component/SearchSeat';
 import SwapSeatRequest from './component/SwapSeatRequest';
 import UpdateProfile from './component/UpdateProfile';
@@ -14,6 +13,7 @@ import AdminDashboard from './component/AdminDashboard';
 import UserDashboard from './component/UserDashboard';
 import LoginPage from './component/LoginPage';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import axios from 'axios'
 
 export default function App() {
 	let flag = false;
@@ -31,11 +31,13 @@ export default function App() {
 			<ThemeProvider theme={theme}>
 				<Router>
 					<Route path="/login" exact component={LoginPage} />
+					
+					<Route path="/userdashboard" exact component={UserDashboard} />
 					<Route path="/add" exact strict component={AddSeat} />
 					<Route path="/admin" exact strict component={Admin} />
 					<Route path="/bookings" exact strict component={Bookings} />
 					<Route path="/delete" exact strict component={DeleteSeat} />
-					<Route path="/addseaturi" exact strict component={AddSeatUri} />
+					<Route path="/addseat" exact strict component={AddSeat} />
 					<Route path="/searchseat" exact strict component={SearchSeat} />
 					<Route
 						path="/swapseatrequest"

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import { history } from 'react-router-dom';
+import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -66,7 +66,7 @@ export default function SignIn() {
 				console.log(res.data);
 				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
 				localStorage.setItem('isAdmin', claims.isAdmin);
-				history.push;
+				history.push();
 			});
 	};
 
