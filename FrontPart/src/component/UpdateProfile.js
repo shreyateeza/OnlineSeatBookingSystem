@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 
-function UpdateProfile() {
+function UpdateProfile(props) {
 
 const [username, setUsername] = useState();
 const [mob, setMob] = useState();
@@ -47,9 +47,10 @@ useEffect(
       .then( response => {
           console.log(response.data);
           alert('Profile Updated');
+          props.history.push('/userprofile');
       })
       
-      console.log("========== subtted = =========");
+      // console.log("========== subtted = =========");
     }
     function handlechange(e){
      

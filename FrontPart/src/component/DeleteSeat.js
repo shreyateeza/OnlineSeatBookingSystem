@@ -52,7 +52,7 @@ function DeleteSeat() {
 <nav class="navbar navbar-light bg-light justify-content-between">
                     <a class="navbar-brand"><big><big><b>DELETE SEAT</b></big></big></a>
                     <form class="form-inline">
-                    <NavLink to="/admindashboard" exact activeStyle={
+                    <NavLink to="/userdashboard" exact activeStyle={
               { color:'green' }
             }><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></NavLink>
                     </form>

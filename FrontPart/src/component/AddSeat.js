@@ -79,7 +79,7 @@ function AddSeat() {
     <nav class="navbar navbar-light bg-light justify-content-between">
     <a class="navbar-brand"><big><big><b>ADD SEATS</b></big></big></a>
     <form class="form-inline">
-    <Link to="/admindashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Back to Dashboard</button></Link>
+    <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Back to Dashboard</button></Link>
     </form>
   </nav>
 

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
 	const classes = useStyles();
 
 	const [username, setUsername] = useState();
@@ -45,7 +46,7 @@ export default function SignUp() {
 		setPassword(event.target.value);
 	};
 
-	const submit = () => {
+	const submit = (props) => {
 		const requestBody = {
 			username: username,
             password: password,
@@ -65,7 +66,13 @@ export default function SignUp() {
 				// localStorage.setItem('User', username);
 				console.log(res.data);
 				alert(res.data);
-				// document.open('userdashboard')
+				if(res.date == "Username already exists"){
+					props.history.push('/signup');
+				}
+				else{
+					props.history.push('/login');
+				}
+				
 			});
 			
 	};

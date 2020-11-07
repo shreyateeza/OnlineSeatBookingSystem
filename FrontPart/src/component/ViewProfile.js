@@ -82,7 +82,7 @@ function ViewProfile() {
 
       <div class="form-group">
       <Typography component="h1" variant="h5" align="left">
-					<left>Addrress:</left>   <right><b> {user.address} </b></right>
+					<left>Address:</left>   <right><b> {user.address} </b></right>
 				</Typography>
         {/* <h5>{user.address}</h5> */}
       </div>

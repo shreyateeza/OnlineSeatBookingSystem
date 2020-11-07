@@ -10,6 +10,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -17,12 +18,28 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function UserDashboard() {
+function UserDashboard(props) {
 	const classes = useStyles();
 	const isAdmin = localStorage.getItem('isAdmin');
-
+	const usern = localStorage.getItem('User');
+	function logout(){
+		localStorage.removeItem("User");
+		localStorage.removeItem("Token");
+		props.history.push('/login');
+	}
 	return (
-		<div><br/><br/>
+		<div>
+		<nav class="navbar navbar-light bg-light">
+			<p></p>
+     	
+			<h5>
+		
+			
+			<i class=" fas fa-user-circle m-2 fa-2x "/>{usern} <button class="btn btn-warning btn-rounded rounded-pill m-2" onClick={logout}> Logout </button></h5>
+			
+      	</nav>
+			
+			<br/><br/>
 			 <h1 class="display-5"><b><big>USER DASHBOARD </big></b></h1> <br/><br/><br/> 
 
 			{/* <Typography variant="h5"> Main Menu </Typography> */}
@@ -112,7 +129,7 @@ function UserDashboard() {
 							</Button>
 						</Link>
 
-						<Link to="/admin" style={{ textDecoration: 'none' }}>
+						<Link to="/updatebookings" style={{ textDecoration: 'none' }}>
 							<Button
 								variant="contained"
 								size="large"

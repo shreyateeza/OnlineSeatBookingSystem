@@ -112,7 +112,7 @@ function Admin() {
 			<AppBar position="static">
 				<Toolbar>
 					<Typography variant="h5" className={classes.title}>
-						Update Seats
+						Update Bookings
 					</Typography>
 					<Link
 						to="/userdashboard"

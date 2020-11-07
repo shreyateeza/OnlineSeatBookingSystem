@@ -4,7 +4,7 @@ import './styles.css';
 import ViewProfile from './component/ViewProfile'
 import Home from './component/Home'
 import AddSeat from './component/AddSeat';
-import Admin from './component/Admin';
+import Admin from './component/ManageBookings';
 import Bookings from './component/Bookings';
 import DeleteSeat from './component/DeleteSeat';
 import SearchSeat from './component/SearchSeat';
@@ -42,7 +42,7 @@ export default function App() {
 					<Route path="/updateprofile" exact strict component={UpdateProfile} />
 					<Route path="/userprofile" exact strict component={ViewProfile} />
 
-					<Route path="/admin" exact strict component={Admin} />
+					<Route path="/updatebookings" exact strict component={Admin} />
 					
 					<Route path="/add" exact strict component={AddSeat} />
 					<Route path="/bookings" exact strict component={Bookings} />

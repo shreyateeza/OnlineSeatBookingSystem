@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
 	const classes = useStyles();
 
 	const [username, setUsername] = useState();
@@ -66,8 +66,8 @@ export default function SignIn() {
 				console.log(res.data);
 				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
 				localStorage.setItem('isAdmin', claims.isAdmin);
-				
-				history.push("/userdashboard");
+				props.history.push('/userdashboard');
+				// history.push("/userdashboard");
 			});
 	};
 

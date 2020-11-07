@@ -76,13 +76,14 @@ function Bookings() {
 
 	return (
 		<div>
-			<AppBar position="static">
-				<Toolbar>
+		
+		<AppBar position="static">
+		<Toolbar>
 					<Typography variant="h5" className={classes.title}>
 						Bookings
 					</Typography>
 					<Link
-						to="/userdashboard" exact
+						to="/userdashboard"
 						style={{ textDecoration: 'none', color: '#FFF' }}
 					>
 						<Button
@@ -94,7 +95,8 @@ function Bookings() {
 						</Button>
 					</Link>
 				</Toolbar>
-			</AppBar>
+			</AppBar> 
+			
 			<Grid container justify="center">
 				<Table className={classes.table} size="small" aria-label="simple table">
 					<TableHead>
