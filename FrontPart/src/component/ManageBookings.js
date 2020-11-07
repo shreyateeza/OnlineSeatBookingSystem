@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		textAlign: 'left',
+		padding: 10
 	},
 	table: {
 		width: 1000,
@@ -109,10 +111,10 @@ function Admin() {
 
 	return (
 		<div>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h5" className={classes.title}>
-						Update Bookings
+		<AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Update bookings
 					</Typography>
 					<Link
 						to="/userdashboard"
@@ -127,7 +129,8 @@ function Admin() {
 						</Button>
 					</Link>
 				</Toolbar>
-			</AppBar>
+			</AppBar> 
+			<br/>
 			<Grid
 				container
 				direction="column"

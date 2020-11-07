@@ -3,21 +3,50 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import AuthHeader from "./AuthHeader";
 import axios from "axios";
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+	AppBar,
+	Toolbar,
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'left',
+    padding: 10
+  },
+  table: {
+    width: 1000,
+  },
+  menuBtn: {
+    textDecoration: 'none',
+  },
+}));
 
 function UpdateProfile(props) {
-
-const [username, setUsername] = useState();
-const [mob, setMob] = useState();
-const [add, setAdd] = useState();
+  const classes = useStyles();
+  const [username, setUsername] = useState();
+  const [mob, setMob] = useState();
+  const [add, setAdd] = useState();
 
 useEffect(
     () => {
@@ -65,27 +94,37 @@ useEffect(
 
 
     return (
-      <div>
-      <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand"><big><big><b>UPDATE PROFILE</b></big></big></a>
-      <form class="form-inline">
-      <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></Link>
-      </form>
-      </nav>
+     
+      <>
+      <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Update Profile
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							className={classes.menuBtn}
+						>
+							Back to Dashboard
+						</Button>
+					</Link>
+				</Toolbar>
+			</AppBar> 
       <div class="container" style={{margin:'auto'}}>
-  <form style={{width:'50%'}}>
+      <form style={{width:'50%'}}>
 
-    {/* <div class="form-group">
-      <label for="email">Username:</label>
-      <input type="text" class="form-control" id="username" value={username}   disabled />
-    </div> */}
-    <br/><br/>
-    <div class='card'> 
+      <br/><br/>
+      <div class='card'> 
 
-    <Link to="/userprofile" exact>
-    <button class="btn btn-warning float-right float-top"> Cancel </button>
-    </Link>
-    <TextField
+      <Link to="/userprofile" exact>
+      <button class="btn btn-warning float-right float-top"> Cancel </button>
+      </Link> 
+      <TextField
 						variant="outlined"
 						margin="normal"
 						required
@@ -102,7 +141,6 @@ useEffect(
 						margin="normal"
 						required
 						fullWidth
-						rows={2}
             value={mob}
 						onChange={handlechange2}
           autoFocus
@@ -121,25 +159,21 @@ useEffect(
 						onChange={handlechange}
 				
 					/>
-      {/* <div class="form-group">
-        <label for="email">Address:</label>
-        <input type="text" class="form-control" id="email" value={add} onChange={handlechange} />
-      </div> */}
-
-      
-      <Button
-             margin="normal"
+     
+    <Button
+            //  margin="normal"
+            // fullWidth
             variant="contained"
 						color="primary"
 						onClick={handleSubmit}
 					>Update</Button>
     </div>
     
-
-    {/* <button class="btn btn-outline-warning" onClick={handleSubmit}>Submit</button> */}
   </form>
+  
 </div>
-</div>
+
+</>
     );
 }
 

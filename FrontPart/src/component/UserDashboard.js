@@ -25,30 +25,31 @@ function UserDashboard(props) {
 	function logout(){
 		localStorage.removeItem("User");
 		localStorage.removeItem("Token");
+		console.log(localStorage.getItem("isAdmin"));
+		localStorage.removeItem("isAdmin");
 		props.history.push('/login');
 	}
 	return (
 		<div>
 		<nav class="navbar navbar-light bg-light">
 			<p></p>
-     	
-			<h5>
-		
-			
-			<i class=" fas fa-user-circle m-2 fa-2x "/>{usern} <button class="btn btn-warning btn-rounded rounded-pill m-2" onClick={logout}> Logout </button></h5>
-			
+			<h5>	
+			<i class=" fas fa-user-circle m-2 fa-2x "/>{usern}
+			<button id="logo" class="btn btn-warning btn-rounded rounded-pill m-2" onClick={logout} > Logout </button>
+			</h5>
+			{/* style={{boxShadow:'0 0 2px 1px gray'}} */}
       	</nav>
 			
 			<br/><br/>
 			 <h1 class="display-5"><b><big>USER DASHBOARD </big></b></h1> <br/><br/><br/> 
-
-			{/* <Typography variant="h5"> Main Menu </Typography> */}
 			<Grid justify="center">
 				<Link to="/bookings" style={{ textDecoration: 'none' }}>
 					<Button
 						variant="contained"
 						color="primary"
 						size="large"
+						multiline
+						rowsMax={3}
 						className={classes.button}
 						startIcon={<HistoryIcon />}
 					>

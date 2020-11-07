@@ -30,10 +30,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		textAlign: 'left',
+    	padding: 10
 	},
 	table: {
 		width: 1000,
 		margin: theme.spacing(2),
+		
 	},
 	menuBtn: {
 		textDecoration: 'none',
@@ -180,10 +183,10 @@ const SearchSeat = () => {
 
 	return (
 		<div>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h5" className={classes.title}>
-						Seat Search
+		<AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Search Seats
 					</Typography>
 					<Link
 						to="/userdashboard"
@@ -198,8 +201,8 @@ const SearchSeat = () => {
 						</Button>
 					</Link>
 				</Toolbar>
-			</AppBar>
-
+			</AppBar> 
+			<br/><br/>
 			<Grid
 				container
 				direction="column"

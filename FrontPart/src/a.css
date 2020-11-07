@@ -19,3 +19,13 @@ text-decoration: none;
     width: 90%;
     
 }
+#logo{
+    background-color: ivory;
+    color:#404040;
+    box-shadow: 0 0 1px 1px black;
+}
+#logo:hover{
+    background-color: #666666;
+    color:ivory;
+    box-shadow: 0 0 0px 0px white;
+}

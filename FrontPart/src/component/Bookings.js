@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		textAlign: 'left',
+    	padding: 10
 	},
 	table: {
 		width: 1000,
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function Bookings() {
+function Bookings(props) {
 	const classes = useStyles();
 	const [seatInfo, setSeatInfo] = useState([]);
 
@@ -74,12 +77,13 @@ function Bookings() {
 		});
 	};
 
+
 	return (
 		<div>
 		
-		<AppBar position="static">
+		<AppBar position="static" style={{ background: '#2E3B55' }}>
 		<Toolbar>
-					<Typography variant="h5" className={classes.title}>
+					<Typography variant="h3" className={classes.title}>
 						Bookings
 					</Typography>
 					<Link
@@ -96,7 +100,7 @@ function Bookings() {
 					</Link>
 				</Toolbar>
 			</AppBar> 
-			
+			<br/><br/>
 			<Grid container justify="center">
 				<Table className={classes.table} size="small" aria-label="simple table">
 					<TableHead>

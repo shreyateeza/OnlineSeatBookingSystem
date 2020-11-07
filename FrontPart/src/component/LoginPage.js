@@ -11,6 +11,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { useHistory as history } from 'react-router-dom';
+import {
+	AppBar,
+	Toolbar,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -19,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
+	title: {
+		flexGrow: 1,
+		textAlign: 'left',
+		padding: 10
+	  },
 	avatar: {
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
@@ -72,15 +86,31 @@ export default function SignIn(props) {
 	};
 
 	return (
+		<>
+			 <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					SEAT BOOKING SYSTEM
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+					</Link>
+				</Toolbar>
+			</AppBar>
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 			<div className={classes.paper}>
+			<div class='card' style={{width:'115%'}}> 
+      	{/* <form > */}
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
 					Sign in
 				</Typography>
+				
 				<form className={classes.form} action="/" noValidate>
 					<TextField
 						variant="outlined"
@@ -127,6 +157,8 @@ export default function SignIn(props) {
 					</Grid>
 				</form>
 			</div>
+			</div>
 		</Container>
+		</>
 	);
 }

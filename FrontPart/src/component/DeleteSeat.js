@@ -2,18 +2,50 @@ import React, { useState } from "react";
 import {NavLink} from "react-router-dom";
 import AuthHeader from "./AuthHeader";
 import axios from "axios"; 
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+	AppBar,
+	Toolbar,
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'left',
+    padding: 10
+  },
+  table: {
+    width: 1000,
+  },
+  menuBtn: {
+    textDecoration: 'none',
+  },
+}));
 
 
 function DeleteSeat() {
+  
+  const classes = useStyles();
   const [seatNo, setSeatNo] = useState()
   const [password, setPassword] = useState()
 
@@ -48,18 +80,30 @@ function DeleteSeat() {
 
   return (
     <div>
-
-<nav class="navbar navbar-light bg-light justify-content-between">
-                    <a class="navbar-brand"><big><big><b>DELETE SEAT</b></big></big></a>
-                    <form class="form-inline">
-                    <NavLink to="/userdashboard" exact activeStyle={
-              { color:'green' }
-            }><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></NavLink>
-                    </form>
-                </nav>
-
-    <div class="container" style={{margin:'auto'}}>
-      <form action="/action_page.php" style={{width:'50%'}}>
+      <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Delete Seats
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							className={classes.menuBtn}
+						>
+							Back to Dashboard
+						</Button>
+					</Link>
+				</Toolbar>
+			</AppBar> 
+      
+      <br/><br/>
+      <div class="container" style={{margin:'auto'}}>
+      <div class='card' style={{width:'40%'}}> 
+      <form >
       <br/><br/>
         {/* <div class="form-group">
           <label for="email">Seat Id:</label>
@@ -120,6 +164,7 @@ function DeleteSeat() {
 						onClick={dlt}
 					>Delete Seat</Button>
       </form>
+    </div>
     </div>
     </div>
   );
