@@ -82,7 +82,7 @@ function Bookings() {
 						Bookings
 					</Typography>
 					<Link
-						to="/userdashboard"
+						to="/userdashboard" exact
 						style={{ textDecoration: 'none', color: '#FFF' }}
 					>
 						<Button

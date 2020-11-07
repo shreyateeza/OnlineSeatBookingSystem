@@ -4,7 +4,18 @@ import {useState, useEffect} from 'react';
 import AuthHeader from "./AuthHeader";
 import axios from "axios";
 import Typography from '@material-ui/core/Typography';
-
+import {
+	AppBar,
+	Toolbar,
+	
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
 
 function ViewProfile() {
 
@@ -32,40 +43,45 @@ function ViewProfile() {
 
     return (
       
-        <div class="container" style={{margin: 'auto'}} >
-          <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="navbar-brand"><big><big><b>Profile</b></big></big></a>
-    <form class="form-inline">
-    <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></Link>
-    </form>
-  </nav>
-  <br/><br/><br/> 
+      <>
+      <nav class="navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand"><big><big><b>USER PROFILE</b></big></big></a>
+      <form class="form-inline">
+      <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></Link>
+      </form>
+      </nav>
 
-  <div style={{width: '50%', border:'1px gray solid', padding:'30px'}}>
+
+  <div class="container" style={{margin: 'auto'}} >
+  <br/><br/><br/> 
+    
+  <div class="card" style={{width: '45%', padding:'30px', paddingBottom:'70px'}}>
     
   <Link to="/updateprofile" exact>
-  <button onClick="/updateprofile" class="btn btn-warning float-right float-top"> Edit Profile </button>
+  <button class="btn btn-warning float-right float-top"> Edit Profile </button>
   </Link>
 
 
     <br/><br/>
     <br/>
+    
     <div class="form-group">
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" align="left"  >
 					<left>Username:</left>   <right><b> {user.username} </b></right>
 				</Typography>
      {/* <h5>{user.username}</h5> */}
 
     </div>
     
-    <div class="form-group"><Typography component="h1" variant="h5">
+    <div class="form-group">
+      <Typography component="h1" variant="h5" align="left">
 					<left>Mobile:</left>      <right><b> {user.mobile} </b></right>
 				</Typography>
         {/* <h5>{user.mobile}</h5> */}
       </div>
 
       <div class="form-group">
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" align="left">
 					<left>Addrress:</left>   <right><b> {user.address} </b></right>
 				</Typography>
         {/* <h5>{user.address}</h5> */}
@@ -86,7 +102,7 @@ function ViewProfile() {
       </div> */}
 
     </div>
-</div>
+</div></>
     );
 }
 

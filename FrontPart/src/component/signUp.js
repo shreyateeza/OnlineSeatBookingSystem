@@ -64,6 +64,7 @@ export default function SignUp() {
 				// localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				// localStorage.setItem('User', username);
 				console.log(res.data);
+				alert(res.data);
 				// document.open('userdashboard')
 			});
 			

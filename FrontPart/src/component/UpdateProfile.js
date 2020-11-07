@@ -46,6 +46,7 @@ useEffect(
       axios.put('http://localhost:8082/user/profile', requestbody, { headers: AuthHeader() })
       .then( response => {
           console.log(response.data);
+          alert('Profile Updated');
       })
       
       console.log("========== subtted = =========");
@@ -78,6 +79,11 @@ useEffect(
       <input type="text" class="form-control" id="username" value={username}   disabled />
     </div> */}
     <br/><br/>
+    <div class='card'> 
+
+    <Link to="/userprofile" exact>
+    <button class="btn btn-warning float-right float-top"> Cancel </button>
+    </Link>
     <TextField
 						variant="outlined"
 						margin="normal"
@@ -91,28 +97,25 @@ useEffect(
 					/>
     <h5>Mobile:</h5>
     <TextField
-						variant="filled"
+            variant="outlined"
 						margin="normal"
 						required
 						fullWidth
-						placeholder=''
-						// label="Mobile"
-            // defaultValue={mob}
+						rows={2}
             value={mob}
 						onChange={handlechange2}
           autoFocus
 					/>
-    {/* <div class="form-group">
-        <label for="email">Mobile: </label>
-        <input type="text" class="form-control" id="mobile" value={mob}  onChange={handlechange2}/>
-      </div> */}
-<h5>Address:</h5>
+
+<h5 >Address:</h5>
         <TextField
-						variant="filled"
-						margin="normal"
-						required
-						fullWidth
-					
+					 id="outlined-multiline-static"
+           margin="normal"
+           multiline
+           rows={4}
+           
+           variant="outlined"
+            
 						value={add}
 						onChange={handlechange}
 				
@@ -124,12 +127,13 @@ useEffect(
 
       
       <Button
-            // fullWidth
-            
+             margin="normal"
             variant="contained"
 						color="primary"
 						onClick={handleSubmit}
 					>Update</Button>
+    </div>
+    
 
     {/* <button class="btn btn-outline-warning" onClick={handleSubmit}>Submit</button> */}
   </form>

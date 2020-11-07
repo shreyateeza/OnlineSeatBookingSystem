@@ -66,7 +66,8 @@ export default function SignIn() {
 				console.log(res.data);
 				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
 				localStorage.setItem('isAdmin', claims.isAdmin);
-				history.push();
+				
+				history.push("/userdashboard");
 			});
 	};
 
@@ -105,7 +106,7 @@ export default function SignIn() {
 						autoComplete="current-password"
 						onChange={handlePassChange}
 					/>
-					<Link href="userdashboard" variant="body2">
+					{/* <Link href="userdashboard" variant="body2"> */}
 						<Button
 							fullWidth
 							variant="contained"
@@ -115,15 +116,11 @@ export default function SignIn() {
 						>
 							Sign In
 						</Button>
-					</Link>
+					{/* </Link> */}
 					<Grid container justify="space-between" direction="row">
+						
 						<Grid item>
-							<Link href="#" variant="body2">
-								Forgot password?
-							</Link>
-						</Grid>
-						<Grid item>
-							<Link href="register" variant="body2">
+							<Link href="signup" variant="body2">
 								{"Don't have an account? Sign Up"}
 							</Link>
 						</Grid>

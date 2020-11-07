@@ -22,8 +22,10 @@ function UserDashboard() {
 	const isAdmin = localStorage.getItem('isAdmin');
 
 	return (
-		<div>
-			<Typography variant="h5"> Main Menu </Typography>
+		<div><br/><br/>
+			 <h1 class="display-5"><b><big>USER DASHBOARD </big></b></h1> <br/><br/><br/> 
+
+			{/* <Typography variant="h5"> Main Menu </Typography> */}
 			<Grid justify="center">
 				<Link to="/bookings" style={{ textDecoration: 'none' }}>
 					<Button
@@ -61,7 +63,7 @@ function UserDashboard() {
 					</Button>
 				</Link>
 
-				<Link to="/#" style={{ textDecoration: 'none' }}>
+				<Link to="/userprofile" style={{ textDecoration: 'none' }}>
 					<Button
 						variant="contained"
 						color="primary"
@@ -69,7 +71,7 @@ function UserDashboard() {
 						className={classes.button}
 						startIcon={<AccountBoxIcon />}
 					>
-						Edit Profile
+						Profile
 					</Button>
 				</Link>
 

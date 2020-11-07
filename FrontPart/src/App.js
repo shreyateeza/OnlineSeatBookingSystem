@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import './styles.css';
+import ViewProfile from './component/ViewProfile'
+import Home from './component/Home'
 import AddSeat from './component/AddSeat';
 import Admin from './component/Admin';
 import Bookings from './component/Bookings';
@@ -14,6 +16,7 @@ import UserDashboard from './component/UserDashboard';
 import LoginPage from './component/LoginPage';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import axios from 'axios'
+import SignUp from './component/signUp';
 
 export default function App() {
 	let flag = false;
@@ -31,33 +34,24 @@ export default function App() {
 			<ThemeProvider theme={theme}>
 				<Router>
 					<Route path="/login" exact component={LoginPage} />
+					<Route path="/" exact component={Home} />
+					<Route path="/signup" exact component={SignUp} />
 					
 					<Route path="/userdashboard" exact component={UserDashboard} />
-					<Route path="/add" exact strict component={AddSeat} />
+					<Route path="/admindashboard" exact strict component={AdminDashboard} />
+					<Route path="/updateprofile" exact strict component={UpdateProfile} />
+					<Route path="/userprofile" exact strict component={ViewProfile} />
+
 					<Route path="/admin" exact strict component={Admin} />
+					
+					<Route path="/add" exact strict component={AddSeat} />
 					<Route path="/bookings" exact strict component={Bookings} />
 					<Route path="/delete" exact strict component={DeleteSeat} />
 					<Route path="/addseat" exact strict component={AddSeat} />
 					<Route path="/searchseat" exact strict component={SearchSeat} />
-					<Route
-						path="/swapseatrequest"
-						exact
-						strict
-						component={SwapSeatRequest}
-					/>
-					<Route path="/updateprofile" exact strict component={UpdateProfile} />
-					<Route
-						path="/userseatbooking"
-						exact
-						strict
-						component={UserSeatBooking}
-					/>
-					<Route
-						path="/admindashboard"
-						exact
-						strict
-						component={AdminDashboard}
-					/>
+					<Route path="/swapseatrequest" exact strict component={SwapSeatRequest}/>
+					<Route	path="/userseatbooking" exact strict component={UserSeatBooking} />
+					
 				</Router>
 			</ThemeProvider>
 		</div>
