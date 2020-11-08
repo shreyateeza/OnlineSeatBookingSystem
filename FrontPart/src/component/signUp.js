@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import { useHistory as history } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
 	AppBar,
 	Toolbar,
@@ -52,6 +52,8 @@ export default function SignUp(props) {
 	const [username, setUsername] = useState();
 	const [password, setPassword] = useState();
 
+	let history = useHistory();
+
 	const handleNameChange = (event) => {
 		setUsername(event.target.value);
 	};
@@ -64,7 +66,8 @@ export default function SignUp(props) {
 		const requestBody = {
 			username: username,
             password: password,
-            "seats":[]
+			seats:[],
+			role:"ROLE_USER"
 		};
 
 		console.log(requestBody);
@@ -80,11 +83,11 @@ export default function SignUp(props) {
 				// localStorage.setItem('User', username);
 				console.log(res.data);
 				alert(res.data);
-				if(res.date == "Username already exists"){
-					props.history.push('/signup');
+				if(res.data == "Username already exists"){
+					history.push('/signup');
 				}
 				else{
-					props.history.push('/login');
+					history.push('/login');
 				}
 				
 			});

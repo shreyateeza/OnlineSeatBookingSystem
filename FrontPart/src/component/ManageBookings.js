@@ -85,7 +85,9 @@ function Admin() {
 
 		axios.put('http://localhost:8082/admin/seat', requestBody, {
 			headers: getHeaders(),
-		});
+		}).then(res=>[
+			alert("Updated")
+		]);
 	};
 
 	useEffect(() => {

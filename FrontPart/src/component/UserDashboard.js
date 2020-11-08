@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,9 +23,16 @@ const useStyles = makeStyles((theme) => ({
 
 function UserDashboard(props) {
 	const classes = useStyles();
-	const isAdmin = localStorage.getItem('isAdmin');
-	const usern = localStorage.getItem('User');
-	function logout(){
+	const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin'))
+	let usern = localStorage.getItem('User');
+	 useEffect(()=>{
+		setIsAdmin(localStorage.getItem('isAdmin'));
+		usern = localStorage.getItem('User');
+		console.log(usern)
+		console.log(typeof(isAdmin))
+	 },[isAdmin])
+
+	const logout = ()=> {
 		localStorage.removeItem("User");
 		localStorage.removeItem("Token");
 		console.log(localStorage.getItem("isAdmin"));

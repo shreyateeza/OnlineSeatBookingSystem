@@ -79,9 +79,13 @@ export default function SignIn(props) {
 				localStorage.setItem('User', username);
 				console.log(res.data);
 				const claims = JSON.parse(atob(res.data.jwt.split('.')[1]));
+				claims.isAdmin === undefined ? claims.isAdmin = "" : claims.isAdmin = true
 				localStorage.setItem('isAdmin', claims.isAdmin);
 				props.history.push('/userdashboard');
 				// history.push("/userdashboard");
+			}).catch(err => {
+				if (err.response.status === 403 || 400)
+					alert("Invalid or Unauthorized Credentials")
 			});
 	};
 

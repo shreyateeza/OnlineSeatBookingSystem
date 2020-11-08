@@ -37,7 +37,7 @@ export default function App() {
 					<Route path="/" exact component={Home} />
 					<Route path="/signup" exact component={SignUp} />
 					
-					<Route path="/userdashboard" exact component={UserDashboard} />
+					<Route path="/userdashboard" exact strict component={UserDashboard} />
 					<Route path="/admindashboard" exact strict component={AdminDashboard} />
 					<Route path="/updateprofile" exact strict component={UpdateProfile} />
 					<Route path="/userprofile" exact strict component={ViewProfile} />

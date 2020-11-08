@@ -60,7 +60,8 @@ function Bookings(props) {
 	}, []);
 
 	const isDisabled = (status) => {
-		if (status === 'cancelled' || 'past') return true;
+		if (status === 'cancelled' || status === 'past') 
+			return true;
 		else return false;
 	};
 

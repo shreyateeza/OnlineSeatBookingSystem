@@ -20,6 +20,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import moment from 'moment';
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SearchSeat = () => {
+const SearchSeat = (props) => {
 	const classes = useStyles();
 	const [office, setOffice] = useState(null);
 	const [startDate, setStartDate] = useState(moment());
@@ -62,6 +63,7 @@ const SearchSeat = () => {
 	const [seatInfo, setSeatInfo] = useState([]);
 	const [bookingInfo, setBookingInfo] = useState([]);
 	const offices = ['Telstra', 'Home', 'Manipal'];
+	const history = useHistory();
 
 	const isStartValid = () => moment(startDate).isBefore(moment());
 
@@ -77,11 +79,15 @@ const SearchSeat = () => {
 		};
 	};
 
-	useEffect(async () => {
+	async function fetch () {
 		const res = await axios.get('http://localhost:8082/user/profile', {
 			headers: getHeaders(),
 		});
 		setBookingInfo(res.data.seats);
+	}
+
+	useEffect(() => {
+		fetch();
 	}, []);
 
 	const checkDoubleBooking = () => {
@@ -164,7 +170,7 @@ const SearchSeat = () => {
 		setSeatInfo(res.data);
 	};
 
-	const handleClick = (index) => {
+	const handleClick = async (index) => {
 		const requestBody = {
 			seats: [
 				{
@@ -176,9 +182,10 @@ const SearchSeat = () => {
 			],
 		};
 
-		axios.put('http://localhost:8082/user/seat', requestBody, {
+		const res = await axios.put('http://localhost:8082/user/seat', requestBody, {
 			headers: getHeaders(),
-		});
+		})
+		props.history.push('/userdashboard')
 	};
 
 	return (
