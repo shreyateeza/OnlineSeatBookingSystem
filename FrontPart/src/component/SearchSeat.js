@@ -178,6 +178,10 @@ const SearchSeat = () => {
 
 		axios.put('http://localhost:8082/user/seat', requestBody, {
 			headers: getHeaders(),
+		})
+		.then((res1) => {
+			alert("booking requested");
+
 		});
 	};
 

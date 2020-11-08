@@ -84,7 +84,7 @@ function Bookings(props) {
 		<AppBar position="static" style={{ background: '#2E3B55' }}>
 		<Toolbar>
 					<Typography variant="h3" className={classes.title}>
-						Bookings
+						My Bookings
 					</Typography>
 					<Link
 						to="/userdashboard"

@@ -60,7 +60,7 @@ export default function SignUp(props) {
 		setPassword(event.target.value);
 	};
 
-	const submit = (props) => {
+	const submit = () => {
 		const requestBody = {
 			username: username,
             password: password,
@@ -80,7 +80,7 @@ export default function SignUp(props) {
 				// localStorage.setItem('User', username);
 				console.log(res.data);
 				alert(res.data);
-				if(res.date == "Username already exists"){
+				if(res.data == "Username already exists"){
 					props.history.push('/signup');
 				}
 				else{
