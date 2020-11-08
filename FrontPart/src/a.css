@@ -52,6 +52,10 @@ header{
 #a{
     color: rgb(82, 80, 80);
 }
-#tile{
-    
+#b{
+    background-color: #4d4d4d;
+    color:ivory;
+}
+#b:hover{
+    background-color: #636262;
 }

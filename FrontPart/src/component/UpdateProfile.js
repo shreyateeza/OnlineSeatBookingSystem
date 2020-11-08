@@ -47,6 +47,7 @@ function UpdateProfile(props) {
   const [username, setUsername] = useState();
   const [mob, setMob] = useState();
   const [add, setAdd] = useState();
+  const [password, setPassword] = useState();
 
 useEffect(
     () => {
@@ -68,9 +69,10 @@ useEffect(
       const requestbody = {
         "username": username,
         "mobile": mob,
-        "address": add
+        "address": add,
+        "password": password
       }
-      console.log("========== subtting = =========");
+      console.log("===== submitting =====");
       console.log(requestbody);
       axios.put('http://localhost:8082/user/profile', requestbody, { headers: AuthHeader() })
       .then( response => {
@@ -89,8 +91,10 @@ useEffect(
    
       setMob(e.target.value );
     }
-
-
+    function handlechange3(e){
+   
+      setPassword(e.target.value );
+    }
 
 
     return (
@@ -143,10 +147,9 @@ useEffect(
 						fullWidth
             value={mob}
 						onChange={handlechange2}
-          autoFocus
 					/>
 
-<h5 >Address:</h5>
+    <h5 >Address:</h5>
         <TextField
 					 id="outlined-multiline-static"
            margin="normal"
@@ -158,6 +161,16 @@ useEffect(
 						value={add}
 						onChange={handlechange}
 				
+					/>
+    <h5>password:</h5>
+    <TextField
+            variant="outlined"
+						margin="normal"
+						required
+						fullWidth
+            
+						onChange={handlechange3}
+            type="password"
 					/>
      
     <Button

@@ -14,8 +14,11 @@ import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
-		margin: theme.spacing(1),
-	},
+		margin: theme.spacing(2),
+		// backgroundColor:'#1ac6ff'
+		borderRadius:'10px',
+		height: '80px'
+	}
 }));
 
 function UserDashboard(props) {
@@ -29,6 +32,7 @@ function UserDashboard(props) {
 		localStorage.removeItem("isAdmin");
 		props.history.push('/login');
 	}
+	
 	return (
 		<div>
 		<nav class="navbar navbar-light bg-light">
@@ -41,24 +45,31 @@ function UserDashboard(props) {
       	</nav>
 			
 			<br/><br/>
-			 <h1 class="display-5"><b><big>USER DASHBOARD </big></b></h1> <br/><br/><br/> 
-			<Grid justify="center">
+
+	<h1 class="display-5" style={{textAlign:'center'}}><b><big>SERVICE DASHBOARD </big></b></h1> <br/><br/><br/> 
+			
+			<Grid container
+				direction="row"
+				justify="center"
+				alignItems="center">
+				
 				<Link to="/bookings" style={{ textDecoration: 'none' }}>
 					<Button
+						id='b'
 						variant="contained"
 						color="primary"
 						size="large"
-						multiline
-						rowsMax={3}
 						className={classes.button}
 						startIcon={<HistoryIcon />}
 					>
 						Booking History
 					</Button>
 				</Link>
-
+				
+				
 				<Link to="/searchseat" style={{ textDecoration: 'none' }}>
 					<Button
+						id='b'
 						variant="contained"
 						color="primary"
 						size="large"
@@ -68,9 +79,12 @@ function UserDashboard(props) {
 						Search for Seats
 					</Button>
 				</Link>
+				
+				
 
 				<Link to="/userseatbooking" style={{ textDecoration: 'none' }}>
 					<Button
+						id='b'
 						variant="contained"
 						color="primary"
 						size="large"
@@ -80,9 +94,9 @@ function UserDashboard(props) {
 						Book a seat
 					</Button>
 				</Link>
-
 				<Link to="/userprofile" style={{ textDecoration: 'none' }}>
 					<Button
+						id='b'
 						variant="contained"
 						color="primary"
 						size="large"
@@ -95,6 +109,7 @@ function UserDashboard(props) {
 
 				<Link to="/bookings" style={{ textDecoration: 'none' }}>
 					<Button
+						id='b'
 						variant="contained"
 						color="primary"
 						size="large"
@@ -104,10 +119,18 @@ function UserDashboard(props) {
 						Manage Bookings
 					</Button>
 				</Link>
+				</Grid>
+
+				<Grid container
+				direction="row"
+				justify="center"
+				alignItems="center">
+
 				{isAdmin && (
 					<React.Fragment>
 						<Link to="/addseat" style={{ textDecoration: 'none' }}>
 							<Button
+								id='b'
 								variant="contained"
 								color="primary"
 								size="large"
@@ -120,11 +143,13 @@ function UserDashboard(props) {
 
 						<Link to="/delete" style={{ textDecoration: 'none' }}>
 							<Button
+								
 								variant="contained"
 								color="secondary"
 								size="large"
 								className={classes.button}
 								startIcon={<DeleteIcon />}
+								style={{backgroundColor:'#b30000'}}
 							>
 								Delete Seats
 							</Button>
@@ -136,6 +161,7 @@ function UserDashboard(props) {
 								size="large"
 								className={classes.button}
 								startIcon={<SaveIcon />}
+								style={{backgroundColor:'#007399', color:'ivory'}}
 							>
 								Update Bookings
 							</Button>
