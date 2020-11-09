@@ -49,14 +49,15 @@ function Bookings(props) {
 		};
 	};
 
-	useEffect(async () => {
-		const res = await axios.get('http://localhost:8082/user/profile', {
+	useEffect( () => {
+		axios.get('http://localhost:8082/user/profile', {
 			headers: getHeaders(),
-		});
-		res.data.seats.forEach((seat) => {
-			if (moment(seat.startDate).isBefore(moment())) seat.status = 'past';
-		});
-		setSeatInfo(res.data.seats);
+		}).then(res =>{
+			res.data.seats.forEach((seat) => {
+				if (moment(seat.startDate).isBefore(moment())) seat.status = 'past';
+			});
+			setSeatInfo(res.data.seats)
+	})
 	}, []);
 
 	const isDisabled = (status) => {

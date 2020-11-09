@@ -89,18 +89,7 @@ function UserDashboard(props) {
 				
 				
 
-				<Link to="/userseatbooking" style={{ textDecoration: 'none' }}>
-					<Button
-						id='b'
-						variant="contained"
-						color="primary"
-						size="large"
-						className={classes.button}
-						startIcon={<AddBoxIcon />}
-					>
-						Book a seat
-					</Button>
-				</Link>
+
 				<Link to="/userprofile" style={{ textDecoration: 'none' }}>
 					<Button
 						id='b'
