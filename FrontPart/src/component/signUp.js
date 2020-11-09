@@ -62,7 +62,7 @@ export default function SignUp(props) {
 		setPassword(event.target.value);
 	};
 
-	const submit = (props) => {
+	const submit = () => {
 		const requestBody = {
 			username: username,
             password: password,

@@ -6,7 +6,7 @@ import axios from "axios";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
+import { useEffect } from 'react';
 // import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -64,6 +64,39 @@ function UserSeatBooking() {
     function handlechange4(e){
       setEnd(e.target.value);
     }
+    const getHeaders = () => {
+      return {
+        authorization: localStorage.getItem('Token'),
+        'Content-type': 'application/json',
+      };
+    };
+    useEffect(async () => {
+      const res = await axios.get('http://localhost:8082/user/profile', {
+        headers: getHeaders(),
+      });
+    }, []);
+    const handleClick = () => {
+      const requestBody = {
+        seats: [
+          {
+            seatNumber: seatid,
+            office:office,
+            startDate: start,
+            endDate: end,
+            status: 'pending',
+          },
+        ],
+      };
+  
+      axios.put('http://localhost:8082/user/seat', requestBody, {
+        headers: getHeaders(),
+      })
+      .then((res1) => {
+        console.log(res1.data);
+        alert("booking requested");
+        
+      });
+    };
 
     return (
         <div>
@@ -97,7 +130,7 @@ function UserSeatBooking() {
     <br/><br/>
     <div class="container" style={{margin:'auto'}}>
     <div class='card' style={{width:'40%'}}> 
-    <form action="/action_page.php" style={{width:'100%'}}>
+    <form style={{width:'100%'}}>
 
       <div class="form-group">
           
@@ -157,7 +190,7 @@ function UserSeatBooking() {
           
           variant="contained"
           color="primary"
-          // onClick={add}
+          onClick={handleClick}
         >Book</Button>
     {/* <button type="submit" class="btn btn-outline-warning ">Book</button> */}
 </form>

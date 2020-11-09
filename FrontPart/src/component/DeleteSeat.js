@@ -134,11 +134,9 @@ function DeleteSeat() {
 						margin="normal"
 						required
 						fullWidth
-						id="password"
+						type="password"
 						label="password"
             
-            // value={seatNo}
-						autoComplete="seat id"
 						onChange={handlechange2}
 						// autoFocus
 					/>

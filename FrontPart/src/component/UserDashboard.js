@@ -69,7 +69,7 @@ function UserDashboard(props) {
 						className={classes.button}
 						startIcon={<HistoryIcon />}
 					>
-						Booking History
+						My Bookings
 					</Button>
 				</Link>
 				
@@ -103,7 +103,7 @@ function UserDashboard(props) {
 					</Button>
 				</Link>
 
-				<Link to="/bookings" style={{ textDecoration: 'none' }}>
+				{/* <Link to="/bookings" style={{ textDecoration: 'none' }}>
 					<Button
 						id='b'
 						variant="contained"
@@ -114,7 +114,7 @@ function UserDashboard(props) {
 					>
 						Manage Bookings
 					</Button>
-				</Link>
+				</Link> */}
 				</Grid>
 
 				<Grid container

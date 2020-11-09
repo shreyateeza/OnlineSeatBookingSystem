@@ -85,9 +85,11 @@ function Admin() {
 
 		axios.put('http://localhost:8082/admin/seat', requestBody, {
 			headers: getHeaders(),
-		}).then(res=>[
-			alert("Updated")
-		]);
+		})
+		.then((res) => {
+			console.log(res.data);
+			alert("Updated Seat Status");
+		});
 	};
 
 	useEffect(() => {
@@ -116,7 +118,7 @@ function Admin() {
 		<AppBar position="static" style={{ background: '#2E3B55' }}>
 		  <Toolbar >
 					<Typography variant="h3" className={classes.title}>
-					Update bookings
+					Update Bookings
 					</Typography>
 					<Link
 						to="/userdashboard"
