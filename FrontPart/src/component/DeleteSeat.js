@@ -156,7 +156,7 @@ function DeleteSeat() {
         </button> */}
         <Button
             // fullWidth
-            
+            style={{backgroundColor:'#cc0066',marginTop:'15px'}}
 						variant="contained"
 						color="secondary"
 						onClick={dlt}

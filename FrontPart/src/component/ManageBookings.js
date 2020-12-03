@@ -211,6 +211,7 @@ function Admin() {
 											<Button
 												color="primary"
 												size="small"
+												style={{border:'1px gray solid',backgroundColor:'ivory'}}
 												onClick={() => {
 													handleClick(index);
 												}}

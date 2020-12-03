@@ -43,7 +43,7 @@ function UserDashboard(props) {
 	return (
 		<div>
 		<nav class="navbar navbar-light bg-light">
-			<p></p>
+			<h1><b>Seat Booking App</b></h1>
 			<h5>	
 			<i class=" fas fa-user-circle m-2 fa-2x "/>{usern}
 			<button id="logo" class="btn btn-warning btn-rounded rounded-pill m-2" onClick={logout} > Logout </button>

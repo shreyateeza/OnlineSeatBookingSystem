@@ -110,7 +110,7 @@ function ViewProfile() {
     
     <div class="form-group">
       <Typography component="h1" variant="h5" align="left"  >
-					<left>Username:</left>   <right><b> {user.username} </b></right>
+					<left>Username:&ensp;</left>   <right><b> {user.username} </b></right>
 				</Typography>
      {/* <h5>{user.username}</h5> */}
 
@@ -118,14 +118,14 @@ function ViewProfile() {
     
     <div class="form-group">
       <Typography component="h1" variant="h5" align="left">
-					<left>Mobile:</left>      <right><b> {user.mobile} </b></right>
+					<left>Mobile:&ensp;</left>      <right><b> {user.mobile} </b></right>
 				</Typography>
         {/* <h5>{user.mobile}</h5> */}
       </div>
 
       <div class="form-group">
       <Typography component="h1" variant="h5" align="left">
-					<left>Address:</left>   <right><b> {user.address} </b></right>
+					<left>Address:&ensp;</left>   <right><b> {user.address} </b></right>
 				</Typography>
         {/* <h5>{user.address}</h5> */}
       </div>

@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 		
 	},
 	menuBtn: {
-		textDecoration: 'none',
+		// textDecoration: 'none',
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 		width: 300,
 	},
 	button: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(1)
 	},
 }));
 
@@ -210,6 +210,7 @@ const SearchSeat = (props) => {
 				</Toolbar>
 			</AppBar> 
 			<br/><br/>
+			
 			<Grid
 				container
 				direction="column"
@@ -234,7 +235,7 @@ const SearchSeat = (props) => {
 						id="datetime-local"
 						label="Start Time"
 						type="datetime-local"
-						defaultValue="2020-09-30T10:30"
+						defaultValue="2020-12-01T10:30"
 						onChange={startDateChange}
 						error={isStartValid() || checkDoubleBooking()}
 						className={classes.textField}
@@ -246,7 +247,7 @@ const SearchSeat = (props) => {
 						id="datetime-local"
 						label="End Time"
 						type="datetime-local"
-						defaultValue="2020-09-30T11:30"
+						defaultValue="2020-12-01T11:30"
 						onChange={endDateChange || checkDoubleBooking()}
 						error={isEndValid()}
 						className={classes.textField}
@@ -257,6 +258,7 @@ const SearchSeat = (props) => {
 					<Button
 						variant="contained"
 						disabled={isValid()}
+						style={{border:'1px skyblue solid', backgroundColor:'ivory'}}
 						className={classes.button}
 						onClick={search}
 					>
@@ -290,6 +292,7 @@ const SearchSeat = (props) => {
 											<Button
 												color="primary"
 												size="small"
+												style={{border:'1px violet solid',backgroundColor:'ivory'}}
 												disabled={isDisabled(seat.status)}
 												onClick={() => {
 													handleClick(index);

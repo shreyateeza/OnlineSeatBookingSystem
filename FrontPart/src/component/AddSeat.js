@@ -197,7 +197,8 @@ function AddSeat() {
             // fullWidth
             size="large"
             variant="contained"
-						color="secondary"
+            color="secondary"
+            style={{backgroundColor:'forestgreen',marginTop:'15px'}}
 						onClick={add}
 					>Add Seat</Button>
       </form>

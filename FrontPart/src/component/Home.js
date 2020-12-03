@@ -37,8 +37,33 @@ function Home() {
                     </div>
                     </a>
 
+               
                </div>
+               <br/>
+                
+               <div class="d-flex justify-content-center mt-2">
+                    
+                    <div class="card mt-2 p-4 mr-2" style={{width:'300px',backgroundColor:'ivory', height:'190px'}}>    
+                    <h5 class="card-title"><b>Book seats</b></h5>
+                    <h5>
+                    Customer can book their seat through the app which they like if preferred seat is available.
+                    </h5>
+                    </div>
 
+                    <div class="card m-2 p-4" style={{width:'300px',backgroundColor:'ivory'}}>    
+                    <h5 class="card-title"><b>Booking Details</b></h5>
+                    <h5>
+                    Customers can check their all the booking details in the my booking section
+                    </h5>
+                    </div>
+
+                    <div class="card m-2 p-4" style={{width:'300px',backgroundColor:'ivory'}}>    
+                    <h5 class="card-title"><b>Cancel Ticket</b></h5>
+                    <h5>
+                    Customers can cancel the ticket anytime before the event date and the amount will be refunded.
+                    </h5>
+                    </div>
+                </div>
                
         </div>
         </>
