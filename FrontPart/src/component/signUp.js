@@ -10,6 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import {
+	AppBar,
+	Toolbar,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -18,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
+	title: {
+		flexGrow: 1,
+		textAlign: 'left',
+		padding: 10
+	  },
 	avatar: {
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
@@ -31,11 +46,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
 	const classes = useStyles();
 
 	const [username, setUsername] = useState();
 	const [password, setPassword] = useState();
+
+	let history = useHistory();
 
 	const handleNameChange = (event) => {
 		setUsername(event.target.value);
@@ -49,7 +66,8 @@ export default function SignUp() {
 		const requestBody = {
 			username: username,
             password: password,
-            
+			seats:[],
+			role:"ROLE_USER"
 		};
 
 		console.log(requestBody);
@@ -64,20 +82,44 @@ export default function SignUp() {
 				// localStorage.setItem('Token', `Bearer ${res.data.jwt}`);
 				// localStorage.setItem('User', username);
 				console.log(res.data);
+				alert(res.data);
+				if(res.data == "Username already exists"){
+					history.push('/signup');
+				}
+				else{
+					history.push('/login');
+				}
+				
 			});
+			
 	};
 
 	return (
+		<>
+			 <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					SEAT BOOKING SYSTEM
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+					</Link>
+				</Toolbar>
+			</AppBar> 
 		<Container component="main" maxWidth="xs">
+		
 			<CssBaseline />
 			<div className={classes.paper}>
+			<div class='card' style={{width:'115%'}}> 
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
 					Sign Up
 				</Typography>
-				<form className={classes.form} noValidate>
+				<form className={classes.form} action='http://localhost:3000/userdashboard' noValidate>
 					<TextField
 						variant="outlined"
 						margin="normal"
@@ -102,6 +144,7 @@ export default function SignUp() {
 						autoComplete="current-password"
 						onChange={handlePassChange}
 					/>
+					
 					<Button
 						fullWidth
 						variant="contained"
@@ -109,8 +152,10 @@ export default function SignUp() {
 						className={classes.submit}
 						onClick={submit}
 					>
-						Sign In
+						Sign Up
+						
 					</Button>
+				
 					<Grid container justify="space-between" direction="row">
 					
 						<Grid item>
@@ -121,6 +166,8 @@ export default function SignUp() {
 					</Grid>
 				</form>
 			</div>
+			</div>
 		</Container>
+		</>
 	);
 }

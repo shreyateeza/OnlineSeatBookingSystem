@@ -3,24 +3,57 @@ import {Link} from "react-router-dom";
 import { red } from '@material-ui/core/colors';
 import AuthHeader from "./AuthHeader";
 import axios from "axios";
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
+import { makeStyles } from '@material-ui/core/styles';
+import {
+	AppBar,
+	Toolbar,
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'left',
+    padding: 10
+  },
+  table: {
+    width: 1000,
+  },
+  menuBtn: {
+    textDecoration: 'none',
+  },
+}));
+
 
 function AddSeat() {
   
+  const classes = useStyles();
   const [seatNo, setSeatNo] = useState();
   const [floor, setFloor] = useState();
   const [office, setOffice] = useState();
   const [bookingInfo, setBookingInto] = useState([{
     "status" : "unbooked"
   }]);
+  const offices = ['Telstra', 'Home', 'Manipal'];
 
   const [password, setPassword] = useState()
 
@@ -32,7 +65,7 @@ function AddSeat() {
       "seatNumber":seatNo,
       "floor":floor,
       "office":office,
-      "bookgingInfo":bookingInfo
+      "bookingInfo":[]
     }
     console.log(requestbody)
     axios.post("http://localhost:8082/admin/seat", requestbody, { headers: AuthHeader()}).then((res) => {
@@ -70,27 +103,43 @@ function AddSeat() {
     setPassword(e.target.value)
   }
 
+  const handleOfficeChange = (event) => {
+    setOffice(event.target.value);
+  };
   return (
     <div>
-    <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="navbar-brand"><big><big><b>ADD SEATS</b></big></big></a>
-    <form class="form-inline">
-    <Link to="/admindashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Back to Dashboard</button></Link>
-    </form>
-  </nav>
+      <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Add Seats
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							className={classes.menuBtn}
+						>
+							Back to Dashboard
+						</Button>
+					</Link>
+				</Toolbar>
+			</AppBar> 
 
- 
+      <br/><br/>
      <div class="container" style={{margin:'auto'}}>
-      <form style={{width:'50%'}}>
+     <div class='card' style={{width:'40%'}}> 
+      <form >
       <br/><br/>
       <TextField
 						variant="outlined"
 						margin="normal"
 						required
 						fullWidth
-						
+						autoFocus
 						label="Seat Id"
-						
 						onChange={handlechange}
 				
 					/>
@@ -115,25 +164,20 @@ function AddSeat() {
           <label for="email"> Floor:</label>
           <input type="number" class="form-control"  onChange={handlechange2}/>
         </div> */}
-
-
-
-        <TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						
-						label="Office"
-						autoComplete="seat id"
-						onChange={handlechange3}
-				
-					/>
-        {/* <div class="form-group">
-          <label for="email"> Office:</label>
-          <input type="text" class="form-control" onChange={handlechange3} />
-        </div> */}
-
+        
+            <h4 id="demo-simple-select-label p-3">Office : 
+            <select
+              labelId="Office"
+              class="m-3"
+              id="office"
+              value={office}
+              onChange={handleOfficeChange}
+            >
+              {offices.map((officeLocation) => (
+                <option value={officeLocation}> {officeLocation} </option>
+              ))}
+            </select></h4>
+      
 
         <TextField
 						variant="outlined"
@@ -146,31 +190,19 @@ function AddSeat() {
             value={password}
 						
 						onChange={handlechange4}
-						autoFocus
+						
 					/>
-        {/* <div class="form-group">
-          <label for="email"> Admin's Password:</label>
-          <input
-            type="password"
-            class="form-control"
-            value={password}
-            onChange={handlechange4}
-            
-          /> */}
-        {/* </div> */}
-
-        {/* <button class="btn btn-outline-warning" onClick={add}>
-          Add Seat
-        </button> */}
-
+        
         <Button
             // fullWidth
-            
+            size="large"
             variant="contained"
-						color="secondary"
+            color="secondary"
+            style={{backgroundColor:'forestgreen',marginTop:'15px'}}
 						onClick={add}
 					>Add Seat</Button>
       </form>
+    </div>
     </div>
     </div>
   );

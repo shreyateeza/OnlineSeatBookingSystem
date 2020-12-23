@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { useHistory as history } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		textAlign: 'left',
+    	padding: 10
 	},
 	table: {
 		width: 1000,
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function Bookings() {
+function Bookings(props) {
 	const classes = useStyles();
 	const [seatInfo, setSeatInfo] = useState([]);
 
@@ -46,18 +49,20 @@ function Bookings() {
 		};
 	};
 
-	useEffect(async () => {
-		const res = await axios.get('http://localhost:8082/user/profile', {
+	useEffect( () => {
+		axios.get('http://localhost:8082/user/profile', {
 			headers: getHeaders(),
-		});
-		res.data.seats.forEach((seat) => {
-			if (moment(seat.startDate).isBefore(moment())) seat.status = 'past';
-		});
-		setSeatInfo(res.data.seats);
+		}).then(res =>{
+			res.data.seats.forEach((seat) => {
+				if (moment(seat.startDate).isBefore(moment())) seat.status = 'past';
+			});
+			setSeatInfo(res.data.seats)
+	})
 	}, []);
 
 	const isDisabled = (status) => {
-		if (status === 'cancelled' || 'past') return true;
+		if (status === 'cancelled' || status === 'past') 
+			return true;
 		else return false;
 	};
 
@@ -74,12 +79,14 @@ function Bookings() {
 		});
 	};
 
+
 	return (
 		<div>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h5" className={classes.title}>
-						Bookings
+		
+		<AppBar position="static" style={{ background: '#2E3B55' }}>
+		<Toolbar>
+					<Typography variant="h3" className={classes.title}>
+						My Bookings
 					</Typography>
 					<Link
 						to="/userdashboard"
@@ -94,7 +101,8 @@ function Bookings() {
 						</Button>
 					</Link>
 				</Toolbar>
-			</AppBar>
+			</AppBar> 
+			<br/><br/>
 			<Grid container justify="center">
 				<Table className={classes.table} size="small" aria-label="simple table">
 					<TableHead>

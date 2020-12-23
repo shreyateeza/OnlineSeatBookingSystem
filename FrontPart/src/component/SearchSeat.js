@@ -20,6 +20,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import moment from 'moment';
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -30,13 +31,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		textAlign: 'left',
+    	padding: 10
 	},
 	table: {
 		width: 1000,
 		margin: theme.spacing(2),
+		
 	},
 	menuBtn: {
-		textDecoration: 'none',
+		// textDecoration: 'none',
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -47,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
 		width: 300,
 	},
 	button: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(1)
 	},
 }));
 
-const SearchSeat = () => {
+const SearchSeat = (props) => {
 	const classes = useStyles();
 	const [office, setOffice] = useState(null);
 	const [startDate, setStartDate] = useState(moment());
@@ -59,6 +63,7 @@ const SearchSeat = () => {
 	const [seatInfo, setSeatInfo] = useState([]);
 	const [bookingInfo, setBookingInfo] = useState([]);
 	const offices = ['Telstra', 'Home', 'Manipal'];
+	const history = useHistory();
 
 	const isStartValid = () => moment(startDate).isBefore(moment());
 
@@ -74,11 +79,15 @@ const SearchSeat = () => {
 		};
 	};
 
-	useEffect(async () => {
+	async function fetch () {
 		const res = await axios.get('http://localhost:8082/user/profile', {
 			headers: getHeaders(),
 		});
 		setBookingInfo(res.data.seats);
+	}
+
+	useEffect(() => {
+		fetch();
 	}, []);
 
 	const checkDoubleBooking = () => {
@@ -161,7 +170,7 @@ const SearchSeat = () => {
 		setSeatInfo(res.data);
 	};
 
-	const handleClick = (index) => {
+	const handleClick = async (index) => {
 		const requestBody = {
 			seats: [
 				{
@@ -173,17 +182,18 @@ const SearchSeat = () => {
 			],
 		};
 
-		axios.put('http://localhost:8082/user/seat', requestBody, {
+		const res = await axios.put('http://localhost:8082/user/seat', requestBody, {
 			headers: getHeaders(),
-		});
+		})
+		props.history.push('/userdashboard')
 	};
 
 	return (
 		<div>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h5" className={classes.title}>
-						Seat Search
+		<AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Search Seats
 					</Typography>
 					<Link
 						to="/userdashboard"
@@ -198,8 +208,9 @@ const SearchSeat = () => {
 						</Button>
 					</Link>
 				</Toolbar>
-			</AppBar>
-
+			</AppBar> 
+			<br/><br/>
+			
 			<Grid
 				container
 				direction="column"
@@ -224,7 +235,7 @@ const SearchSeat = () => {
 						id="datetime-local"
 						label="Start Time"
 						type="datetime-local"
-						defaultValue="2020-09-30T10:30"
+						defaultValue="2020-12-01T10:30"
 						onChange={startDateChange}
 						error={isStartValid() || checkDoubleBooking()}
 						className={classes.textField}
@@ -236,7 +247,7 @@ const SearchSeat = () => {
 						id="datetime-local"
 						label="End Time"
 						type="datetime-local"
-						defaultValue="2020-09-30T11:30"
+						defaultValue="2020-12-01T11:30"
 						onChange={endDateChange || checkDoubleBooking()}
 						error={isEndValid()}
 						className={classes.textField}
@@ -247,6 +258,7 @@ const SearchSeat = () => {
 					<Button
 						variant="contained"
 						disabled={isValid()}
+						style={{border:'1px skyblue solid', backgroundColor:'ivory'}}
 						className={classes.button}
 						onClick={search}
 					>
@@ -280,6 +292,7 @@ const SearchSeat = () => {
 											<Button
 												color="primary"
 												size="small"
+												style={{border:'1px violet solid',backgroundColor:'ivory'}}
 												disabled={isDisabled(seat.status)}
 												onClick={() => {
 													handleClick(index);

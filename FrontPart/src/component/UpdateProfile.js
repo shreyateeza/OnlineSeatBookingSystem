@@ -3,21 +3,51 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import AuthHeader from "./AuthHeader";
 import axios from "axios";
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+	AppBar,
+	Toolbar,
+	Button,
+	Table,
+	TableBody,
+	TableHead,
+	TableRow,
+	TableCell,
+	Grid,
+} from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'left',
+    padding: 10
+  },
+  table: {
+    width: 1000,
+  },
+  menuBtn: {
+    textDecoration: 'none',
+  },
+}));
 
-function UpdateProfile() {
-
-const [username, setUsername] = useState();
-const [mob, setMob] = useState();
-const [add, setAdd] = useState();
+function UpdateProfile(props) {
+  const classes = useStyles();
+  const [username, setUsername] = useState();
+  const [mob, setMob] = useState();
+  const [add, setAdd] = useState();
+  const [password, setPassword] = useState();
 
 useEffect(
     () => {
@@ -39,16 +69,19 @@ useEffect(
       const requestbody = {
         "username": username,
         "mobile": mob,
-        "address": add
+        "address": add,
+        "password": password
       }
-      console.log("========== subtting = =========");
+      console.log("===== submitting =====");
       console.log(requestbody);
       axios.put('http://localhost:8082/user/profile', requestbody, { headers: AuthHeader() })
       .then( response => {
           console.log(response.data);
+          alert('Profile Updated');
+          props.history.push('/userprofile');
       })
       
-      console.log("========== subtted = =========");
+      // console.log("========== subtted = =========");
     }
     function handlechange(e){
      
@@ -58,27 +91,44 @@ useEffect(
    
       setMob(e.target.value );
     }
-
-
+    function handlechange3(e){
+   
+      setPassword(e.target.value );
+    }
 
 
     return (
-      <div>
-      <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand"><big><big><b>UPDATE PROFILE</b></big></big></a>
-      <form class="form-inline">
-      <Link to="/userdashboard" exact><button class="btn btn-outline-success my-2 my-sm-0" type="submit">BACK TO DASHBOARD</button></Link>
-      </form>
-      </nav>
+     
+      <>
+      <AppBar position="static" style={{ background: '#2E3B55' }}>
+		  <Toolbar >
+					<Typography variant="h3" className={classes.title}>
+					Update Profile
+					</Typography>
+					<Link
+						to="/userdashboard"
+						style={{ textDecoration: 'none', color: '#FFF' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							className={classes.menuBtn}
+						>
+							Back to Dashboard
+						</Button>
+					</Link>
+				</Toolbar>
+			</AppBar> 
       <div class="container" style={{margin:'auto'}}>
-  <form style={{width:'50%'}}>
+      <form style={{width:'50%'}}>
 
-    {/* <div class="form-group">
-      <label for="email">Username:</label>
-      <input type="text" class="form-control" id="username" value={username}   disabled />
-    </div> */}
-    <br/><br/>
-    <TextField
+      <br/><br/>
+      <div class='card'> 
+
+      <Link to="/userprofile" exact>
+      <button class="btn btn-warning float-right float-top"> Cancel </button>
+      </Link> 
+      <TextField
 						variant="outlined"
 						margin="normal"
 						required
@@ -89,52 +139,54 @@ useEffect(
 						disabled
 				
 					/>
-    
+    <h5>Mobile:</h5>
     <TextField
-						variant="outlined"
+            variant="outlined"
 						margin="normal"
 						required
 						fullWidth
-						
-						label="Mobile"
-						value={mob}
+            value={mob}
 						onChange={handlechange2}
-				
 					/>
-    {/* <div class="form-group">
-        <label for="email">Mobile: </label>
-        <input type="text" class="form-control" id="mobile" value={mob}  onChange={handlechange2}/>
-      </div> */}
 
+    <h5 >Address:</h5>
         <TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						
-						label="Address"
+					 id="outlined-multiline-static"
+           margin="normal"
+           multiline
+           rows={4}
+           
+           variant="outlined"
+            
 						value={add}
 						onChange={handlechange}
 				
 					/>
-      {/* <div class="form-group">
-        <label for="email">Address:</label>
-        <input type="text" class="form-control" id="email" value={add} onChange={handlechange} />
-      </div> */}
-
-      
-      <Button
-            // fullWidth
+    <h5>password:</h5>
+    <TextField
+            variant="outlined"
+						margin="normal"
+						required
+						fullWidth
             
+						onChange={handlechange3}
+            type="password"
+					/>
+     
+    <Button
+            //  margin="normal"
+            // fullWidth
             variant="contained"
-						color="secondary"
+						color="primary"
 						onClick={handleSubmit}
 					>Update</Button>
-
-    {/* <button class="btn btn-outline-warning" onClick={handleSubmit}>Submit</button> */}
+    </div>
+    
   </form>
+  
 </div>
-</div>
+
+</>
     );
 }
 
